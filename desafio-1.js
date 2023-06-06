@@ -1,28 +1,33 @@
 class ProductManager {
 
     constructor() {
-        this.products = []
+        this.products = [];
     }
     addProduct(title, description, price, thumbnail, code, stock) {
 
+//Primera verificacion:
+
 if(!title||!description||!price||!thumbnail||!code||!stock){
-    console.log('All fields are obligatory');
-} else {
+    console.log(`All fields are obligatory`);
+    return;
+        } 
 
-const  verified = this.verified(code)
-}
 
-code
+if (this.codeDuplicated(code)) {
+    console.log('ERROR - this code is already in use');
+     return;
+          }
 
-        //Objeto Producto
-        const product = {
+        
+            //Object Product
+            const product = {
 
             id: this.#getMaxId() + 1,
             title,
             description,
             price,
             thumbnail,
-            code,
+            code, 
             stock
 
         };
@@ -30,15 +35,16 @@ code
         //Objeto agregado a lista
         this.products.push(product)
 
-        //code
-
-        this.products.forEach((cod) => {
-
-         
-
-        })
 
     }
+
+
+    codeDuplicated(code) {
+        if (this.products.find((product) => product.code === code)) {
+          return true;
+        }
+        return false;
+      }
 
     //Metodo ID autoincrementable
     #getMaxId() {
@@ -58,7 +64,7 @@ code
 
        if(!this.products.find((producto)=> producto.id === id)){
 
-console.log('Not Found')
+        console.log('Not Found')
 
        } else {
         console.log('Exist')
@@ -69,13 +75,13 @@ console.log('Not Found')
 }
 
 
-const variant = new ProductManager()
+const variantproduct = new ProductManager()
 
-variant.addProduct('papas', 'negras', 1400, 'img', 12, 21)
-variant.addProduct('papas', 'rojas', 1400, 'img', 12, 21)
-variant.addProduct('papas', 'rojas', 1400, 'img', 12, 21)
+variantproduct.addProduct('papas','negras',1200,'noimage','S1599',15)
+variantproduct.addProduct('papas','blancas',1000,'noimage','S1533',12)
+variantproduct.addProduct('cebolla','blancas',1000,'noimage','S1533',12)
+variantproduct.addProduct('cebolla','morada',1000,'noimage','S113',12)
+variantproduct.addProduct('tomate','redondo',1000,'noimage','S15113',12)
 
-
-
-console.log(variant.getProducts())
-variant.getProductById(5)
+console.log(variantproduct.getProducts())
+// variantproduct.getProductById(5)
