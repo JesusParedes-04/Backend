@@ -1,4 +1,3 @@
-
 import fs from "fs";
 
 export default class ProductManager {
@@ -32,15 +31,9 @@ export default class ProductManager {
       };
 
       productFile.push(product);
-//---------------------------------Escribe contenido del archivo y lo pasa a String -------------------------------------
-      
-    await fs.promises.writeFile(this.path, JSON.stringify(productFile));
 
-//---------------------------------Escribe contenido del archivo y lo pasa a String -------------------------------------
-
-    } 
-    
-    catch (error) {
+      await fs.promises.writeFile(this.path, JSON.stringify(productFile));
+    } catch (error) {
       console.log(error);
     }
   }
@@ -57,8 +50,6 @@ export default class ProductManager {
     return maxId;
   }
 
-
-// ---------------------------------------------Trae y Lee el contenido del archivo--------------------------
   async getProducts() {
     try {
       if (fs.existsSync(this.path)) {
@@ -73,9 +64,6 @@ export default class ProductManager {
       return [];
     }
   }
-
-  // ---------------------------------------------Trae y Lee el contenido del archivo--------------------------
-
 
   getProductById(id) {
     const product = this.products.find(producto => producto.id === id);
@@ -95,7 +83,7 @@ export default class ProductManager {
         console.log('Product not found');
         return;
       }
-    // ------- cantidad de elementos a eliminar del productIndex -------
+
       productFile.splice(productIndex, 1);
 
       await fs.promises.writeFile(this.path, JSON.stringify(productFile));
@@ -115,12 +103,9 @@ export default class ProductManager {
         return;
       }
 
-    // obtener el objeto que representa eñ producto en la posición productIndex y actualizarlo
-
       const updatedProduct = {
         ...productFile[productIndex],
         ...updatedFields
-
       };
 
       productFile[productIndex] = updatedProduct;
@@ -131,28 +116,23 @@ export default class ProductManager {
       console.log(error);
     }
   }
-
 }
 
 const variantproduct = new ProductManager('./products.json');
 
-// const test = async () => {
-//   await variantproduct.addProduct('papas', 'blancas',1800, 'C2131', 'Bk222', 1);
-//   await variantproduct.addProduct('papas', 'rojas', 1600, 'A222', 'tew222', 24);
-//   await variantproduct.addProduct('papas', 'negras', 1600, 'B222', 'Rtw222', 14);
-//   await variantproduct.updateProduct(6,{
-//     title:'papas', 
-//     description:'moradas',
-//     price: 1600,
-//     thumbnail: 'B222',
-//     code: 'Rtw99',
-//     stock: 14}
-    
-//    );
-// //   variantproduct.deleteProduct(2);
-// }
+const test = async () => {
+  await variantproduct.addProduct('papas', 'blancas',1800, 'C2131', 'Bk222', 1);
+  await variantproduct.addProduct('papas', 'rojas', 1600, 'A222', 'tew222', 24);
+  await variantproduct.addProduct('papas', 'negras', 1600, 'B222', 'Rtw222', 14);
+  await variantproduct.updateProduct(6,{
+    title:'papas', 
+    description:'moradas',
+    price: 1600,
+    thumbnail: 'B222',
+    code: 'Rtw99',
+    stock: 14}
+  );
+  // variantproduct.deleteProduct(2);
+}
 
-// test()
-
-// export default productManager
-
+test();
