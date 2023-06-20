@@ -1,19 +1,17 @@
 import express from "express";
-import productManager from "./productManager.js";
+import ProductManager from "./productManager.js";
 
-
-const product = new productManager()
-
-const app = express()
-
-app.use(express.json())
+const app = express();
 app.use(express.urlencoded({extended:true}));
 
-app.post('/products', async (req, res)=> {
-    let newProduct = req.body
-    res.send(await product.writeProduct(newProduct))
-})
+const products = new ProductManager()
+const readProducts = products.getProducts();
 
+app.get('./products', async (req, res)=>{
+
+    res.send(await readProducts);
+
+})
 
 
 app.listen(8080, ()=>{
