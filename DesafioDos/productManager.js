@@ -1,5 +1,3 @@
-
-
 const fs = require('fs');
 
 class ProductManager {
@@ -154,5 +152,3 @@ const test = async () => {
 }
 
 test()
-
-export default ProductManager;

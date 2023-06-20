@@ -1,6 +1,6 @@
 
-import {promises as fs} from 'fs'
-// const fs = require('fs');
+
+const fs = require('fs');
 
 
 class ProductManager {
@@ -142,16 +142,13 @@ const test = async () => {
   await variantproduct.addProduct('papas', 'blancas',1800, 'C2131', 'Bk222', 1);
   await variantproduct.addProduct('papas', 'rojas', 1600, 'A222', 'tew222', 24);
   await variantproduct.addProduct('papas', 'negras', 1600, 'B222', 'Rtw222', 14);
-  await variantproduct.updateProduct(6,
-    
-    {
-      title:'papas', 
-      description:'moradas',
-      price: 1600,
-      thumbnail: 'B222',
-      code: 'Rtw99',
-      stock: 14
-    }
+  await variantproduct.updateProduct(6,{
+    title:'papas', 
+    description:'moradas',
+    price: 1600,
+    thumbnail: 'B222',
+    code: 'Rtw99',
+    stock: 14}
     
    );
 //   variantproduct.deleteProduct(2);
@@ -159,4 +156,4 @@ const test = async () => {
 
 test()
 
-export default ProductManager
+export default productManager
