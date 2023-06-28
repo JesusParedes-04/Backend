@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended:true}));
 
-const products = new ProductManager('./products.json');
+const products = new ProductManager();
 
 
 //------------------------ - -----------------------------
@@ -100,6 +100,6 @@ try {
 // });
 
 
-// app.listen(8080, ()=>{
-//   console.log('Server express listening on port 8080');
-// });
+app.listen(8080, ()=>{
+  console.log('Server express listening on port 8080');
+});
