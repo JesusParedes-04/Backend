@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended:true}));
 
-const products = new ProductManager();
+const products = new ProductManager('./products.json');
 
 
 //------------------------ - -----------------------------
