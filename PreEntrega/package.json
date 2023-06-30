@@ -1,8 +1,8 @@
 {
-  "name": "desafiotres",
+  "name": "primerapreentrega",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "src/server.js",
   "type": "module",
   "scripts": {
 
