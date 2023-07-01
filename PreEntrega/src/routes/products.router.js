@@ -1,11 +1,7 @@
 
-import { Router } from 'express';
+import { Router } from "express";
 const router = Router()
-import ProductManager from "../managers/productManager";
-
-
-
-
+import ProductManager from "../managers/productManager.js";
 const products = new ProductManager('./products.json');
 
 router.get('/', async (req, res)=>{
@@ -28,7 +24,7 @@ router.get('/', async (req, res)=>{
     });
     
     
-    router.get('/:id', async(req,res)=>{
+router.get('/:id', async(req,res)=>{
     
     try {
     
@@ -51,7 +47,7 @@ router.get('/', async (req, res)=>{
     });
     
     
-    router.post('/', async (req, res) => {
+router.post('/', async (req, res) => {
     
     try {
       

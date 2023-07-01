@@ -6,48 +6,36 @@ export default class ProductManager {
     this.products = [];
   }
 
-  async addProduct(title, description, price, thumbnail, code, stock) {
+  async addProduct(obj) {
     try {
-      if (!title || !description || !price || !thumbnail || !code || !stock) {
-        console.log('Todos los campos son obligatorios');
-        return;
+      const product = {
+        id: await this.#getMaxId() + 1,
+        ...obj
       }
 
       const productFile = await this.getProducts();
-
-      if (this.codeDuplicated(code, productFile)) {
-        console.log('ERROR - this code is already in use');
-        return;
-      }
-
-      const product = {
-        id: this.#getMaxId(productFile) + 1,
-        title,
-        description,
-        price,
-        thumbnail,
-        code,
-        stock
-      };
-
       productFile.push(product);
-
-      await fs.promises.writeFile(this.path, JSON.stringify(productFile));
-    } catch (error) {
-      console.log(error);
-    }
-  }
+      await fs.promises.writeFile(this.path, JSON.stringify(productFile))
+  }catch(error){
+console.log(error);
+  } }
 
   codeDuplicated(code, productFile) {
     return productFile.some(product => product.code === code);
   }
 
-  #getMaxId(productFile) {
-    let maxId = 0;
-    productFile.forEach(product => {
-      if (product.id > maxId) maxId = product.id;
-    });
-    return maxId;
+  async #getMaxId() {
+    try {
+      const productFile = await this.getProducts();
+      let maxId = 0;
+      productFile.forEach(product => {
+        if (product.id > maxId) maxId = product.id;
+      });
+      return maxId;
+    } catch (error) {
+      console.log(error);
+      return 0;
+    }
   }
 
   async getProducts() {
@@ -126,19 +114,15 @@ export default class ProductManager {
 const variantproduct = new ProductManager('./products.json');
 
 const test = async () => {
-  await variantproduct.addProduct('papas', 'blancas', 1800, 'C2131', 'Bk222', 1);
-  await variantproduct.addProduct('papas', 'rojas', 1600, 'A222', 'tew222', 24);
-  await variantproduct.addProduct('papas', 'negras', 1600, 'B222', 'Rtw222', 14);
-  // await variantproduct.updateProduct(6, {
-  //   title: 'papas',
-  //   description: 'moradas',
-  //   price: 1600,
-  //   thumbnail: 'B222',
-  //   code: 'Rtw99',
-  //   stock: 14
-  // }
-  // );
-  // variantproduct.deleteProduct(2);
+  await variantproduct.addProduct({
+  
+    "title": 'papas',
+    "description": 'moradas',
+    "price": 1600,
+    "thumbnail": 'B222',
+    "code": 'Rtw99',
+    "stock": 14
+  })
+
 }
 
-test();
