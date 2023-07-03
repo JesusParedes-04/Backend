@@ -113,16 +113,16 @@ console.log(error);
 
 const variantproduct = new ProductManager('./products.json');
 
-const test = async () => {
-  await variantproduct.addProduct({
+// const test = async () => {
+//   await variantproduct.addProduct({
   
-    "title": 'papas',
-    "description": 'moradas',
-    "price": 1600,
-    "thumbnail": 'B222',
-    "code": 'Rtw99',
-    "stock": 14
-  })
+//     "title": 'papas',
+//     "description": 'moradas',
+//     "price": 1600,
+//     "thumbnail": 'B222',
+//     "code": 'Rtw99',
+//     "stock": 14
+//   })
 
-}
+// }
 

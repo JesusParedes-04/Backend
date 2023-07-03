@@ -1,19 +1,40 @@
 import { Router } from "express";
-import cartsManager from "../managers/productManager.js";
+import CartManager from "../managers/CartManager.js";
 
-const router = Router()
+const carts = new CartManager('./carts.json');
 
-const cart = []
-
-router.get("/", (req, res)=>{
-    res.json(cart)
-})
-
-router.post("/",(req,res)=>{
-const cart = req.body;
-cart.push(cart)
-res.json(cart)})
+const router = Router();
 
 
+router.post('/', async (req, res) => {
+  try {
+    const newCart = await carts.createCart();
+    res.json(newCart);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
-export default router
+router.get('/:cid', async (req, res) => {
+  try {
+    const cartId = parseInt(req.params.cid);
+    const cart = await carts.getCartById(cartId);
+    res.json(cart);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+router.post('/:cid/product/:pid', async (req, res) => {
+  try {
+    const cartId = parseInt(req.params.cid);
+    const productId = parseInt(req.params.pid);
+
+    const updatedCart = await carts.saveProductsToCart(cartId, productId);
+    res.json(updatedCart);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+    export default router;
