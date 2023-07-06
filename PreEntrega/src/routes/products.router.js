@@ -29,7 +29,6 @@ router.get('/:id', async (req, res) => {
 
   try {
 
-
     let id = parseInt(req.params.id);
     let productsAll = await products.getProducts();
     let productByID = productsAll.find(prod => prod.id === id);
