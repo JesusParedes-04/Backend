@@ -17,8 +17,8 @@ app.use('/', viewsRouter);
 
 //handlebars
 app.engine('handlebars', handlebars.engine());
-app.set ('views', __dirname + '/views')
-app.set('view engine', 'handlebars')
+app.set('view engine', 'handlebars');
+app.set ('views', __dirname + '/views');
 
 app.listen(8080, ()=>{
   console.log('Server express listening on port 8080');
