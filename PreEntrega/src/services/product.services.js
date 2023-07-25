@@ -1,5 +1,5 @@
-import ProductDaoMongo from "../daos/mongodb/product.dao";
-const productDao = ProductDaoMongo();
+import ProductDaoMongo from "../daos/mongodb/product.dao.js";
+const productDao = new ProductDaoMongo();
 
 
 // import ProductDaoFs from "../daos/fileSystem/product.dao.js";
@@ -35,7 +35,7 @@ else return item;
 export const create = async (obj) => {
 
     try {
-return newProd = await productDao.addProduct(obj)
+const newProd = await productDao.addProduct(obj)
 if(!newProd) return false;
 else return newProd
     } catch (error) {

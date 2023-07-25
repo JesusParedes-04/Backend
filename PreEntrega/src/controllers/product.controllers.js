@@ -1,4 +1,4 @@
-import * as service from "../services/product.services"
+import * as service from "../services/product.services.js"
 
 export const getAll = async (req, res, next)=>{
 

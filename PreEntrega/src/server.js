@@ -1,13 +1,15 @@
 import express from "express";
+import { errorHandler } from "./middlewares/errorHandler.js";
+import morgan from 'morgan'
+import './daos/mongodb/connection.js'
+import productRouter from './routes/product.routes.js'
 import { __dirname } from "./utils.js";
 import handlebars from "express-handlebars";
-import productRouter from "./routes/products.router.js";
+// import productRouter from "./routes/products.router.js";
 import cartRouter from "./routes/carts.router.js";
 import viewsRouter from "./routes/views.router.js";
 import {Server} from "socket.io"
 import ProductManager from "./managers/productManager.js"; 
-// import { errorHandler } from "./middlewares/errorHandler.js";
-// import morgan from 'morgan'
 
 const app = express();
 
@@ -17,7 +19,7 @@ app.use(express.urlencoded({extended:true}));
 // app.use(express.static(__dirname + '/public'))
 app.use(morgan('dev'))
 app.use(errorHandler)
-
+app.use('api/products',productRouter)
 
 app.listen(8080,()=>{
   console.log('Server listening on port 8080')
