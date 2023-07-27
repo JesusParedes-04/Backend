@@ -19,7 +19,7 @@ app.use(express.urlencoded({extended:true}));
 // app.use(express.static(__dirname + '/public'))
 app.use(morgan('dev'))
 app.use(errorHandler)
-app.use('api/products',productRouter)
+app.use('/api/products',productRouter)
 
 app.listen(8080,()=>{
   console.log('Server listening on port 8080')
