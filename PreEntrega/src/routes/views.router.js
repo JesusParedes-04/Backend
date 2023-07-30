@@ -23,7 +23,6 @@ try {
 
     res.status(500).json({ message: error.message });
 
-    
 }
 
 })
@@ -38,6 +37,10 @@ router.get('/realtimeproducts', async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+});
+
+router.get('/chat', (req, res) => {
+  res.render('chat', { title: 'Chat' });
 });
 
 export default router

@@ -4,7 +4,7 @@ export default class ProductDaoMongo {
 
 
 
-    async getProducts() {
+    async getAll() {
 
         try {
 
@@ -17,7 +17,7 @@ export default class ProductDaoMongo {
 
 
     }
-    async getProductById(id) {
+    async getById(id) {
 
 
         try {
@@ -30,7 +30,7 @@ export default class ProductDaoMongo {
         }
 
     }
-    async addProduct(obj) {
+    async create(obj) {
         try {
             const response = await ProductModel.create(obj)
             return response
@@ -38,7 +38,7 @@ export default class ProductDaoMongo {
             console.log(error)
         }
     }
-    async updateProduct(id, obj) {
+    async update(id, obj) {
         try {
             const response = await ProductModel.findByIdAndUpdate(id, obj, { new: true })
             return response
@@ -48,7 +48,7 @@ export default class ProductDaoMongo {
             console.log(error)
         }
     }
-    async deleteProduct(id) {
+    async remove(id) {
         try {
             const response = await ProductModel.findByIdAndDelete(id);
             return response

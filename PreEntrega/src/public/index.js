@@ -1,12 +1,10 @@
 const socket = io();
 
 
-
-  // Capturar el evento de envío del formulario
+  // Capturar el evento de envío del formulario ||  Evitar que el formulario se envíe automáticamente
   document.querySelector('form').addEventListener('submit', (e) => {
-    e.preventDefault(); // Evitar que el formulario se envíe automáticamente
+    e.preventDefault(); 
 
-    // Obtener los valores del formulario
     const title = document.getElementById('inputProducto').value;
     const description = document.getElementById('inputDescripcion').value;
     const code = document.getElementById('inputCode').value;

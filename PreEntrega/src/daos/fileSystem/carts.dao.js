@@ -3,7 +3,7 @@ import ProductManager from "./productManager.js";
 const products = new ProductManager('./products.json');
 
 
-export default class CartManager {
+export default class CartsDaoFs {
   constructor(path) {
     this.path = path;
 
@@ -61,6 +61,7 @@ export default class CartManager {
       const cartFile = await this.getCarts()
       const idCart = cartFile.find(cart => cart.id === id);
 
+      //Ver bien si es idcart o idcart.products
       if (idCart) return idCart
       else { return `ID ${cartId} does not exists` }
     }
