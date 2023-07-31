@@ -8,10 +8,13 @@ import handlebars from "express-handlebars";
 import productRouter from './routes/product.routes.js'
 import cartRouter from "./routes/carts.routes.js";
 import viewsRouter from "./routes/views.router.js";
-import MessageManager from "./managers/messageManager.js"
+import MessageManager from "./daos/mongodb/messages.dao.js"
+const messagesDao = new MessageManager();
+
+
 
 import {Server} from "socket.io"
-const msgManager = new MessageManager(__dirname + '/db/message.json')
+// const msgManager = new MessageManager(__dirname + '/db/message.json')
 
 
 
@@ -69,8 +72,8 @@ socketServer.on('connection', (socket) => {
 })
 
 socket.on('chat:message', async(msg) =>{
-  await msgManager.createMsg(msg);
-  socketServer.emit('messages', await msgManager.getAll());
+  await messagesDao.create(msg);
+  socketServer.emit('message', await messagesDao.getAll());
 })
 
 socket.emit('msg', 'bienvenido al chat');

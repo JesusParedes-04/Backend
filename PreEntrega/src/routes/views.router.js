@@ -4,7 +4,9 @@
 import { Router } from "express";
 import ProductManager from "../managers/productManager.js";
 import {__dirname } from "../utils.js";
+import { getAllMessages } from "../services/messages.services.js";
 const products = new ProductManager('./products.json');
+
 
 const router = Router();
 
@@ -39,8 +41,19 @@ router.get('/realtimeproducts', async (req, res) => {
   }
 });
 
-router.get('/chat', (req, res) => {
-  res.render('chat', { title: 'Chat' });
+
+router.get('/chat', async (req, res) => {
+  try {
+    const message = await getAllMessages();
+    res.render('chat', { title: 'Chat', message });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
+
+
+// router.get('/chat', (req, res) => {
+//   res.render('chat', { title: 'Chat' });
+// });
 
 export default router
