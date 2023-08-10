@@ -1,6 +1,7 @@
 
 //Importando CartModel de Mongoose:
 import { CartsModel } from "./models/carts.model.js";
+import { ProductModel } from "./models/product.model.js";
 
 export default class CartDaoMongo {
 
@@ -22,7 +23,7 @@ export default class CartDaoMongo {
   async getById(id) {
 
     try {
-      const response = await CartsModel.findById(id);
+      const response = await CartsModel.findById(id).populate("items.product")
       return response;
     }
     catch (error) {
@@ -31,7 +32,7 @@ export default class CartDaoMongo {
   }
 
 
-  async create(cart) {
+  async create() {
     try {
       const response = await CartsModel.create({ products: [] });
       return response;
@@ -41,38 +42,115 @@ export default class CartDaoMongo {
     }
   }
 
-
-  async saveProductsToCart(idCart, idProduct) {
+  async saveProductsToCart (cid, pid)  {
     try {
-      const cart = await CartsModel.findById(idCart);
+      const cart = await CartsModel.findById(cid);
+  
       if (!cart) {
-        throw new Error(`Cart with ID ${idCart} not found`);
+        throw new Error(`Cart with ID ${cid} not found`);
       }
-
-
-      // Obtener el producto por su ID
-      const product = await productDao.getById(idProduct);
+  
+      const product = await ProductModel.findById(pid); 
+  
       if (!product) {
-        throw new Error(`Product with ID ${idProduct} not found`);
+        throw new Error(`Product with ID ${pid} not found`);
       }
-
-      const existingProduct = cart.products.find((prod) => prod.prodId.toString() === idProduct);
+  
+      const existingProduct = cart.items.find(
+        (item) => item.product._id.toString() === pid
+      );
+  
       if (existingProduct) {
         existingProduct.quantity += 1;
       } else {
-        cart.products.push({
-          prodId: idProduct,
+        cart.items.push({
+          product: pid,
           quantity: 1,
         });
       }
-      // Guarda el carrito actualizado en la base de datos
+  
       await cart.save();
       return cart;
     } catch (error) {
       console.error('Error saving products to cart:', error);
       throw error;
     }
-  }
+  };
 
+
+  async removeProdFromCart (cid, pid) {
+    try {
+      const cart = await CartsModel.findById(cid);
+      cart.items = cart.items.filter(
+        (item) => item.product._id.toString() !== pid
+      );
+      await cart.save();
+      return cart;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  async updateCartItems  (cid, items) {
+    try {
+      const cart = await CartsModel.findById(cid);
+      cart.items = items;
+      await cart.save();
+      return cart;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  async updateQuantity (cid, pid, quantity) {
+    try {
+      const cart = await CartsModel.findById(cid);
+      const productInCart = cart.items.find(
+        (item) => item.product._id.toString() === pid
+      );
+  
+      if (productInCart) productInCart.quantity = quantity;
+      else throw new Error("Product not found in cart");
+  
+      await cart.save();
+      return cart;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  async removeProducts (cid) {
+    try {
+      const cart = await CartsModel.findByIdAndUpdate(
+        cid,
+        { items: [] },
+        { new: true }
+      );
+      return cart;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 }
+//   async deleteAllProductsFromCart(cid) {
+//     try {
+//       const cart = await CartsModel.findById(cid);
+      
+//       if (!cart) {
+//         throw new Error(`Cart with ID ${cid} not found`);
+//       }
+
+//       cart.items = [];
+//       await cart.save();
+      
+//       return cart;
+//     } catch (error) {
+//       console.log(error);
+//       throw error;
+//     }
+//   };
+// }
+  

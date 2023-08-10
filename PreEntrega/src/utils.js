@@ -1,5 +1,12 @@
+import {dirname} from 'path';   
 import { fileURLToPath } from 'url';
-import {dirname} from 'path';
 export const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default __dirname
+
+
+export const stringToBoolean = (string) => {
+    if (string === "true") return true;
+    if (string === "false") return false;
+    return null;
+  };

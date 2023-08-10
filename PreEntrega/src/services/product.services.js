@@ -17,6 +17,35 @@ export const getAll = async () => {
 
 }
 
+export const getAllProductsPag = async (options) => {
+    try {
+      const response = await productDao.getAllProductsPag(options);
+  
+      const result = {
+        payload: response.docs,
+        status: "success",
+        totalPages: response.totalPages,
+        prevPage: response.prevPage,
+        nextPage: response.nextPage,
+        page: response.page,
+        hasPrevPage: response.hasPrevPage,
+        hasNextPage: response.hasNextPage,
+        prevLink: response.hasPrevPage
+          ? `http://localhost:8080/views/products?page=${response.prevPage}`
+          : null,
+        nextLink: response.hasNextPage
+          ? `http://localhost:8080/views/products?page=${response.nextPage}`
+          : null,
+      };
+  
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
 export const getById = async (id) => {
 
     try {
@@ -30,17 +59,16 @@ else return item;
 
 }
 
-export const create = async (obj) => {
-
+export const create = async (obj) =>{
     try {
-const newProd = await productDao.create(obj)
-if(!newProd) return false;
-else return newProd
+        const createdProduct = await productDao.create(obj);
+        return createdProduct;
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
-
 }
+
+
 
 export const update = async (id, obj) => {
 
@@ -62,3 +90,5 @@ return item
     }
 
 }
+
+

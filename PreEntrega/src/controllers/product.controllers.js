@@ -1,15 +1,25 @@
+import { ProductModel } from "../daos/mongodb/models/product.model.js";
 import * as service from "../services/product.services.js"
+import {stringToBoolean} from "../utils.js"
 
-export const getAll = async (req, res, next)=>{
 
+export const getAll = async (req, res, next) => {
     try {
-        const response = await service.getAll();
-        res.status(200).json(response)
+      const { limit, page, sortOrder, category, available } = req.query;
+  
+      const result = await service.getAllProductsPag({
+        limit,
+        page,
+        sortOrder,
+        category,
+        available: stringToBoolean(available),
+      });
+  
+      res.status(200).json(result);
     } catch (error) {
-        next (error.message)
+      next(error);
     }
-
-}
+  };
 
 export const getById = async (req, res, next)=>{
 
@@ -26,16 +36,17 @@ try {
     
 }
 
-export const create = async (req, res, next)=>{
+export const create = async (req, res) => {
     try {
-        const newProd = await service.create(req.body)
-        if(!newProd) res.status(404).json ({msg: 'vALIDATION eRROR!'});
-        else res.json(newProd)
+        const productData = req.body;
+
+        const createdProduct = await ProductModel.create(productData);
+
+        res.status(201).json(createdProduct);
     } catch (error) {
-        next(error.message)
+        res.status(500).json({ error: "Error creating product" });
     }
 }
-
 
 export const update = async (req, res, next)=>{
     try {
