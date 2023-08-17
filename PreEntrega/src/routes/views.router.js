@@ -1,4 +1,4 @@
-//En este espacio se configuran todos los endpoints de las views en handlebars
+//En este espacio se configuran todos los endpoints de las views en handlebars. Renderizamos TODO.
 //Configuración de ruta {{{body}}}
 
 import { Router } from "express";
@@ -53,10 +53,11 @@ router.get('/chat', async (req, res) => {
 });
 
 
-//Views cart y product
+//Render cart y product
 
 router.get('/products', async (req, res) => {
   try {
+    const { user } = req.session;
     const { page } = req.query;
     const {
       payload: products,
@@ -71,6 +72,7 @@ router.get('/products', async (req, res) => {
     const plainProducts = products.map((product) => product.toObject());
 
     res.render('products', {
+      user,
       products: plainProducts,
       totalPages,
       currentPage,
@@ -101,5 +103,17 @@ router.get('/carts/:id', async (req, res) => {
     res.render('error', { message: error, code: 500 });
   }
 });
+
+//Render del registro y login
+
+
+router.get("/register", (req, res) => {
+  res.render("register");
+});
+
+router.get("/login", (req, res) => {
+  res.render("login");
+});
+
 
 export default router

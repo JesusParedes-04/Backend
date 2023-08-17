@@ -1,8 +1,6 @@
 const socket = io();
 
-
 let username = null;
-
 
 if(!username) {
   Swal.fire({
