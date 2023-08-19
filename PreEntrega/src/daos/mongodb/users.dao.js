@@ -11,7 +11,7 @@ export default class UserDao {
       console.log("userFound", userFound);
       
       if (!userFound) {
-        const isAdmin = email === "admin@coder.com" && password === "admin1234";
+        const isAdmin = email === "adminCoder@coder.com" && password === "adminCod3r123";
         const newUser = await UserModel.create({
           ...user,
           role: isAdmin ? "admin" : "user",
