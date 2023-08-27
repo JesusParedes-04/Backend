@@ -1,36 +1,73 @@
+import { createHash, isValidPassword } from "../../utils.js";
 import { UserModel } from "./models/user.model.js";
 
 export default class UserDao {
 
 
-  async userRegister(user) {
+  async register(user) {
     try {
 
       const { email, password } = user;
-      const userFound = await UserModel.findOne({ email });
-      console.log("userFound", userFound);
-      
+      const userFound = await this.getByEmail(email);
+
       if (!userFound) {
-        const isAdmin = email === "adminCoder@coder.com" && password === "adminCod3r123";
-        const newUser = await UserModel.create({
+        if (email === "adminCoder@coder.com" && password === "adminCod3r123") {
+          return await UserModel.create({
+            ...user,
+            password: createHash(password),
+            role: isAdmin ? "admin" : "user",
+          });
+        }
+        return await UserModel.create({
           ...user,
-          role: isAdmin ? "admin" : "user",
-        });
-        return newUser;
+          password: createHash(password)
+        })
       } else return false;
     } catch (error) {
       console.log(error);
     }
   }
 
-  async loginUser(user) {
+  async login(user) {
 
     try {
       const { email, password } = user;
-      const validUser = await UserModel.findOne({ email, password });
-      return validUser ? validUser : false;
-    } catch (error) {
+      const validUser = await this.getByEmail(email);
+      if (validUser) {
+
+        const passValid = isValidPassword(password, validUser)
+        if (!passValid) return false;
+        else return validUser;
+      } else return false;
+    }
+    catch (error) {
       console.log(error);
     }
   }
+
+  async getById(id) {
+
+    try {
+      const userExist = await UserModel.findById(id)
+      if (userExist) return userExist
+      else return false
+      }
+      catch (error) {
+        console.log(error)
+      }
+    }
+
+async getByEmail(email){
+
+try{
+  const userExist=await UserModel.findOne({email})
+  if(userExist) return userExist
+  else return false
+} catch(error){
+  console.log(error)
+  throw new Error(error)
+  }
+
+}
+
 }

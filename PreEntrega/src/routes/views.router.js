@@ -104,6 +104,7 @@ router.get('/carts/:id', async (req, res) => {
   }
 });
 
+
 //Render del registro y login
 
 

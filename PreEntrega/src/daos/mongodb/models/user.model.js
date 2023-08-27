@@ -21,7 +21,13 @@ const userSchema = new Schema({
     role: {
         type: String,
         default: 'user'
-    }
+    },
+
+    isGitHub: {
+        type:Boolean,
+        required: true,
+        default: false
+    },
 });
 
 export const UserModel = model('users', userSchema);

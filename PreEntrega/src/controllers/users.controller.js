@@ -1,4 +1,5 @@
 import * as userService from "../services/users.services.js";
+ 
 
 export const userRegister = async (req, res) => {
   try {
@@ -27,7 +28,11 @@ export const loginUser = async (req, res) => {
   }
 };
 
+
 export const logoutUser = (req, res) => {
   req.session.destroy();
   res.redirect("/login");
 };
+
+
+
