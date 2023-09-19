@@ -1,58 +1,75 @@
-import express from "express";
-import { __dirname } from "./utils.js";
+import express, {json, urlencoded} from "express";
+import cookieParser from "cookie-parser";
+import passport from "passport";
 import handlebars from "express-handlebars";
-import productRouter from "./routes/products.router.js";
-import cartRouter from "./routes/carts.router.js";
+import session from 'express-session'
+import { __dirname } from "./utils.js";
+import dotenv from 'dotenv'
+import { errorHandler } from "./middlewares/errorHandler.js";
+import morgan from 'morgan'
+import IndexRouter from './routes/index.routes.js';
+
+dotenv.config()
+
+import userRouter from "./routes/users.routes.js"
 import viewsRouter from "./routes/views.router.js";
-import {Server} from "socket.io"
-import ProductManager from "./managers/productManager.js"; 
-// import { errorHandler } from "./middlewares/errorHandler.js";
-// import morgan from 'morgan'
+import productRouter from './routes/product.routes.js'
+import cartRouter from "./routes/carts.routes.js";
+
+import "./daos/mongodb/connection.js";
+import socketManager from './sockets/chat.socket.js'
 
 const app = express();
 
 
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
-app.use(express.static(__dirname + '/public'))
-app.use(morgan('dev'))
-app.use(errorHandler)
-
-app.use('/api/products', productRouter);
-app.use('/api/carts', cartRouter);
-app.use('/', viewsRouter);
-
-//handlebars
-app.engine('handlebars', handlebars.engine());
-app.set ('views', __dirname + '/views');
-app.set('view engine', 'handlebars');
+const indexRouter = new IndexRouter()
 
 
-const httpServer = app.listen(8080, ()=>{
-  console.log('Server express listening on port 8080');
-});
+app
+//middlewares
+.use(json())
+.use(urlencoded({extended:true}))
+.use(morgan('dev'))
+//session
+.use(cookieParser())
+//passport
+.use(passport.initialize())
+.use(passport.session())
+
+.use('/api',indexRouter.getRouter())
+
+const PORT =process.env.PORT || 3000
+    app.listen(PORT,()=>console.log(`server ok,port ${PORT}`))
+
+
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+// app.use(express.static(__dirname + '/public'));
+// app.use(cookieParser())
+// app.use(errorHandler)
+// app.use(morgan('dev'))
 
 
 
-//l socket.io 
-const socketServer = new Server(httpServer)
-const products = new ProductManager('./products.json');
+// //passport
+// app.use(passport.initialize())
+// app.use(passport.session())
 
-socketServer.on('connection', (socket) => {
-  console.log('New Connection!', socket.id);
+// app.use('/api/products', productRouter);
+// app.use('/api/carts', cartRouter);
+// app.use("/users", userRouter);
+// app.use('/chat', viewsRouter);
+// app.use('/', viewsRouter);
 
-  socket.on('guardarProducto', async (productoData) => {
-    try {
-      await products.addProduct(productoData);
+// // handlebars
+// app.engine('handlebars', handlebars.engine());
+// app.set('views', __dirname + '/views');
+// app.set('view engine', 'handlebars');
 
-      socketServer.emit('productoAgregado', productoData);
-    } catch (error) {
-      console.log(error);
-    }
-  });
 
-  socket.on('disconnect', () => {
-    console.log('User disconnected!', socket.id);
-  });
-});
 
+// const httpServer = app.listen(8080, () => {
+//   console.log('Server express listening on port 8080');
+// });
+
+// socketManager(httpServer)

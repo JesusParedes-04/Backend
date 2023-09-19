@@ -1,0 +1,16 @@
+<div id="homePage" class="page">
+
+
+<div>
+ {{> infoUser user=user }}
+</div>
+
+
+  <h1>Products</h1>
+  {{> productsList products=products }}
+ {{> paginations currentPage=currentPage hasPrevPage=hasPrevPage hasNextPage=hasNextPage prevLink=prevLink nextLink=nextLink }}
+
+
+</div>
+
+<script src="../public/productIndex.js"></script>

@@ -1,0 +1,16 @@
+<header class="pastel-menu text-white py-3 customBorder">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <h1 class="mb-0"><a href="/products" class="text-white text-decoration-none">TecnoShop</a></h1>
+      </div>
+      <div class="col-md-4 d-flex justify-content-end align-items-center">
+        {{#if user }}
+          <button onclick="location.href='/users/logout'" class="btn btn-light w-50">Logout</button>
+        {{else}}
+          <button onclick="location.href='/login'" class="btn btn-light w-50">Login</button>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</header>
