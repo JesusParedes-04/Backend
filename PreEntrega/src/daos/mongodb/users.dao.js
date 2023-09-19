@@ -1,73 +1,47 @@
-import { createHash, isValidPassword } from "../../utils.js";
+import MongoDao from "./mongo.dao.js";
 import { UserModel } from "./models/user.model.js";
+import { createHash, isValidPassword } from "../../utils.js";
 
-export default class UserDao {
+export default class UserDaoMongo extends MongoDao {
+    constructor() {
+        super(UserModel);
+    }
 
-
-  async register(user) {
-    try {
-
-      const { email, password } = user;
-      const userFound = await this.getByEmail(email);
-
-      if (!userFound) {
-        if (email === "adminCoder@coder.com" && password === "adminCod3r123") {
-          return await UserModel.create({
-            ...user,
-            password: createHash(password),
-            role: isAdmin ? "admin" : "user",
-          });
+    async register(user) {
+        try {
+            const { email, password } = user;
+            const existUser = await this.getByEmail( email );
+            if(!existUser) return await this.model.create({
+                ...user,
+                password: createHash(password)
+            });
+            else return false;
+        } catch (error) {
+            console.log(error);
         }
-        return await UserModel.create({
-          ...user,
-          password: createHash(password)
-        })
-      } else return false;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async login(user) {
-
-    try {
-      const { email, password } = user;
-      const validUser = await this.getByEmail(email);
-      if (validUser) {
-
-        const passValid = isValidPassword(password, validUser)
-        if (!passValid) return false;
-        else return validUser;
-      } else return false;
-    }
-    catch (error) {
-      console.log(error);
-    }
-  }
-
-  async getById(id) {
-
-    try {
-      const userExist = await UserModel.findById(id)
-      if (userExist) return userExist
-      else return false
-      }
-      catch (error) {
-        console.log(error)
-      }
     }
 
-async getByEmail(email){
+    async getByEmail(email) {
+        try {
+            const user = await this.model.findOne({ email });
+            if(user) return user;
+            else return false;
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
-try{
-  const userExist=await UserModel.findOne({email})
-  if(userExist) return userExist
-  else return false
-} catch(error){
-  console.log(error)
-  throw new Error(error)
-  }
-
-}
-
-}
+    async login(user) {
+        try {
+            const { email, password } = user;
+            const userExist = await this.getByEmail( email );
+            if(userExist) {
+                const passValid = isValidPassword(userExist, password);
+                if(!passValid) return false;
+                else return userExist;
+            } return false;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+};

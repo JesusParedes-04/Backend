@@ -1,21 +1,39 @@
-import usersDao from '../daos/mongodb/users.dao.js'
+import Services from "./class.services.js";
+import pkg from 'jsonwebtoken';
+const { sign } = pkg;
+import 'dotenv/config';
+import UserDaoMongo from "../daos/mongodb/users.dao.js";
+const userDao = new UserDaoMongo();
 
-const userDao = new usersDao();
+const SECRET_KEY = process.env.SECRET_KEY_JWT;
 
-export const userRegister = async (user) => {
+export default class UserService extends Services {
+  constructor() {
+    super(userDao);
+  }
+
+  #generateToken(user) {
+    const payload = {
+      userId: user.id,
+    };
+    return sign(payload, SECRET_KEY, { expiresIn: '10m' });
+  };
+
+  async register(user) {
     try {
-      const newUser = await userDao.userRegister(user);
-      return newUser;
+      return await userDao.register(user);
     } catch (error) {
       console.log(error);
     }
   };
-  
-  export const loginUser = async (user) => {
+
+  async login(user) {
     try {
-      const userExist = await userDao.loginUser(user);
-      return userExist;
+      const userExist = await userDao.login(user);
+      if(userExist) return this.#generateToken(userExist);
+      else return false;
     } catch (error) {
       console.log(error);
     }
   };
+}

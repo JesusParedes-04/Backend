@@ -1,38 +1,113 @@
-import * as userService from "../services/users.services.js";
- 
+import Controllers from "./class.controller.js";
+import { createResponse } from "../utils.js";
+import UserService from "../services/users.services.js";
+const service=new UserService()
 
-export const userRegister = async (req, res) => {
-  try {
-    const user = req.body;
-    const newUser = await userService.userRegister(user);
+export default class UserController extends Controllers{
+    constructor(){
+        super(service)
+    }
 
-    if (newUser) res.redirect("/login");
-    else res.redirect("/error-register");
-  } catch (error) {
-    console.log(error);
-  }
-};
+register = async (req, res, next) => {
+    try {
+      const newUser = await userService.register(req.body);
+      if(!newUser) createResponse(res, 404, 'User already exists');
+      else createResponse(res, 200, newUser);
+    } catch (error) {
+      next(error.message);
+    }
+  };
 
-export const loginUser = async (req, res) => {
-  try {
-    const user = req.body;
-    const userExist = await userService.loginUser(user);
+  login = async (req, res, next) => {
+    try {
+      const token = await userService.login(req.body);
+      res.header("Authorization", token);
+      createResponse(res, 200, token);
+    } catch (error) {
+      next(error.message);
+    }
+  };
 
-    if (userExist) {
-      console.log(req.session);
-      req.session.user = userExist;
-      res.redirect("/products");
-    } else res.redirect("/error-login");
-  } catch (error) {
-    console.log(error);
-  }
-};
+  profile = (req, res, next) => {
+    try {
+      const { first_name, last_name, email, role } = req.user;
+      createResponse(res, 200, {
+        first_name,
+        last_name,
+        email,
+        role,
+      });
+    } catch (error) {
+      next(error.message);
+    }
+  };
 
+  
+}
 
-export const logoutUser = (req, res) => {
-  req.session.destroy();
-  res.redirect("/login");
-};
+// import UserService from "../services/users.services.js";
+// import { createResponse } from "../utils.js";
+// import Controller from "./class.controller.js";
 
+// const userService = new UserService();
+// export default class UserController extends Controller {
+//   constructor() {
+//     super(userService);
+//   }
 
+//   register = async (req, res, next) => {
+//     try {
+//       const newUser = await userService.register(req.body);
 
+//       if (!newUser)
+//         createResponse(res, 400, { error: "User or password already exists" });
+//       else createResponse(res, 200, newUser);
+//     } catch (error) {
+//       next(error.message);
+//     }
+//   };
+
+//   login = async (req, res, next) => {
+//     try {
+//       const token = await userService.login(req.body);
+
+//       res.cookie("token", token, { httpOnly: true });
+//       createResponse(res, 200, { token });
+//     } catch (error) {
+//       next(error.message);
+//     }
+//   };
+
+//   registerFront = async (req, res, next) => {
+//     try {
+//       const newUser = await userService.register(req.body);
+
+//       if (!newUser) res.redirect("/error-register");
+//       else res.redirect("/login?registerSuccessful=true");
+//     } catch (error) {
+//       next(error.message);
+//     }
+//   };
+
+//   loginFront = async (req, res, next) => {
+//     try {
+//       const token = await userService.login(req.body);
+
+//       if (!token) return res.redirect("/error-login");
+
+//       res.cookie("token", token, { httpOnly: true });
+//       res.redirect("/products?loginSuccessful=true");
+//     } catch (error) {
+//       next(error.message);
+//     }
+//   };
+
+//   logout = (req, res) => {
+//     res.clearCookie("token");
+//   };
+
+//   logoutFront = (req, res) => {
+//     res.clearCookie("token");
+//     res.redirect("/login");
+//   };
+// }

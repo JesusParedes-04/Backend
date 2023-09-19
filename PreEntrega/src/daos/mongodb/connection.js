@@ -1,11 +1,13 @@
-import mongoose from 'mongoose';
+import {connect} from 'mongoose';
+import dotev from 'dotenv'
+dotev.config()
+export const connectionString=process.env.CONNECTION_LOCAL_MONGO
 
-
-export const connectionString = 'mongodb://127.0.0.1:27017/ecommerce'
-
+export const connectDB = async () =>{ 
 try{
-    await mongoose.connect(connectionString);
-    console.log('conectado a la base de datos MongoDB')
-} catch (error){
-    console.log('Error al conectar a la base de datos:', error)
+    connect(connectionString)
+    console.log("conectado a la base de datos de MongoDB");
 }
+catch(error){
+    console.log(error);
+}}

@@ -28,6 +28,11 @@ const userSchema = new Schema({
         required: true,
         default: false
     },
+
+    cartID: {
+        type: Schema.Types.ObjectId,
+        reference: "carts",
+      }
 });
 
 export const UserModel = model('users', userSchema);
