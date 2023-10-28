@@ -1,21 +1,25 @@
-<ul class="productList list-group" id="productList">
+
+<ul class="productList" id="productList">
   {{#if products.length}}
     {{#each products as |product|}}
-      <li class="productCard list-group-item d-flex justify-content-between align-items-center">
-        <div class="d-flex">
-          <img src="/images/{{product.thumbnails.[0]}}" alt="{{product.title}}" class="productImage me-3">
-          <div>
-            <h3 class="title">{{product.title}}</h3>
-            <p class="description">{{product.description}}</p>
-            <p><b>${{product.price}}</b></p>
-          </div>
+      <li class="productCard">
+          <img src="/images/{{product.thumbnails.[0]}}" alt="{{product.title}}">
+        <div>
+          <h3 class="title">{{product.title}}</h3>
+          <p class="description">{{product.description}}</p>
+          <p><b>${{product.price}}</b></p>
         </div>
         <div>
-          <button class="p-3 pastel-bg pastel-bg:hover customBorder" data-id="{{product._id}}">Add to cart</button>
         </div>
+
+        {{#if ../user }}
+          <div>
+            <button class="addToCart pastel-bg pastel-bg:hover customBorder" data-product-id="{{product._id}}" data-cart-id="{{../user.cart._id}}">Add to cart</button>
+          </div>
+        {{/if}}
       </li>
     {{/each}}
   {{else}}
-    <li class="list-group-item">No products found</li>
+    <li>No products found</li>
   {{/if}}
 </ul>

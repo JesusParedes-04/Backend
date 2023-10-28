@@ -5,7 +5,7 @@
         <div class="card-body">
           <h1 class="text-center">Register</h1>
 
-          <form action="/users/register" method="post">
+          <form action="/api/users/register-front" method="post">
             <div class="mb-3">
               <label for="first_name" class="form-label">First name</label>
               <input type="text" name="first_name" id="first_name" class="form-control" />
@@ -24,12 +24,17 @@
             </div>
             <div class="mb-3 d-grid">
               <button type="submit" class="btn btn-primary">Register</button>
+
+                {{!-- <button class="btn btn-github mt-2" type="button" onclick="location.href='/users/register-github'">
+              Register with Github
+            </button> --}}
+
             </div>
           </form>
 
           <p class="text-center mb-0">Ya tienes cuenta?</p>
           <div class="mb-3 d-grid">
-            <a href="/login" class="btn btn-secondary">Login</a>
+          <button onclick="location.href='/login'" class="btn btn-secondary">Login</button>
           </div>
         </div>
       </div>

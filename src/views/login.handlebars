@@ -3,7 +3,7 @@
     <div class="card shadow">
       <div class="card-body">
         <h1>Login</h1>
-        <form action='/users/login' method='post'>
+        <form action='/api/users/login-front' method='post'>
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type='email' name='email' id='email' class="form-control" />
@@ -13,14 +13,23 @@
             <input type='password' name='password' id='password' class="form-control" />
           </div>
           <div class="mb-3 d-grid">
-            <button type='submit' class="pastel-bg customBorder">Login</button>
+            <button type='submit'  class="pastel-bg customBorder">Login</button>
+
+            
+{{!-- 
+             <button class="btn btn-github mt-2" type="button" onclick="location.href='/users/register-github'">
+              Login with Github
+            </button> --}}
+
           </div>
         </form>
 
       <div class="mb-3 d-grid">
-        <button onclick="location.href='/register'" class="btn btn-secondary">Ir a registro</button>
+        <button onclick="location.href='/register'" class="btn btn-secondary">Register</button>
       </div>
       </div>
     </div>
   </div>
 </div>
+
+<script src="login.js"></script>

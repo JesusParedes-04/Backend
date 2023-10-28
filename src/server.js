@@ -1,75 +1,32 @@
-import express, {json, urlencoded} from "express";
-import cookieParser from "cookie-parser";
-import passport from "passport";
+import express from "express";
 import handlebars from "express-handlebars";
-import session from 'express-session'
-import { __dirname } from "./utils.js";
-import dotenv from 'dotenv'
+import morgan from "morgan";
+import passport from "passport";
+import cookieParser from "cookie-parser";
 import { errorHandler } from "./middlewares/errorHandler.js";
-import morgan from 'morgan'
-import IndexRouter from './routes/index.routes.js';
-
-dotenv.config()
-
-import userRouter from "./routes/users.routes.js"
-import viewsRouter from "./routes/views.router.js";
-import productRouter from './routes/product.routes.js'
-import cartRouter from "./routes/carts.routes.js";
-
-import "./daos/mongodb/connection.js";
-import socketManager from './sockets/chat.socket.js'
+import { __dirname } from "./utils.js";
+import routes from "./routes/index.js";
+import "./passport/jwt-strategy.js";
 
 const app = express();
 
+const PORT = 8080;
 
-const indexRouter = new IndexRouter()
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(errorHandler);
+app.use(morgan("dev"));
+app.use(express.static(__dirname + "/public"));
 
+app.engine("handlebars", handlebars.engine());
+app.set("view engine", "handlebars");
+app.set("views", __dirname + "/views");
 
-app
-//middlewares
-.use(json())
-.use(urlencoded({extended:true}))
-.use(morgan('dev'))
-//session
-.use(cookieParser())
-//passport
-.use(passport.initialize())
-.use(passport.session())
+app.use(passport.initialize());
 
-.use('/api',indexRouter.getRouter())
+app.use("/", routes);
 
-const PORT =process.env.PORT || 3000
-    app.listen(PORT,()=>console.log(`server ok,port ${PORT}`))
-
-
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.static(__dirname + '/public'));
-// app.use(cookieParser())
-// app.use(errorHandler)
-// app.use(morgan('dev'))
-
-
-
-// //passport
-// app.use(passport.initialize())
-// app.use(passport.session())
-
-// app.use('/api/products', productRouter);
-// app.use('/api/carts', cartRouter);
-// app.use("/users", userRouter);
-// app.use('/chat', viewsRouter);
-// app.use('/', viewsRouter);
-
-// // handlebars
-// app.engine('handlebars', handlebars.engine());
-// app.set('views', __dirname + '/views');
-// app.set('view engine', 'handlebars');
-
-
-
-// const httpServer = app.listen(8080, () => {
-//   console.log('Server express listening on port 8080');
-// });
-
-// socketManager(httpServer)
+app.listen(PORT, () => {
+  console.log(`Server ok en puerto ${PORT}`);
+});

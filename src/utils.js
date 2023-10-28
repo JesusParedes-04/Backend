@@ -1,82 +1,77 @@
 import { dirname } from "path";
 import { fileURLToPath } from "url";
+import { hashSync, compareSync, genSaltSync } from "bcrypt";
+
 export const __dirname = dirname(fileURLToPath(import.meta.url));
 
-import bcrypt from "bcrypt";
+/**
+ * Método que recibe password sin hashear y retorna password hasheada
+ * @param {*} password string
+ * @returns password hasheada -> string
+ * @example
+ * createHash('1234')
+ */
+export const createHash = (password) => hashSync(password, genSaltSync(10));
 
-export const createHash = (password) =>
-  bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+/**
+ * Método que compara password hasheada con password de login
+ * @param {*} user
+ * @param {*} password string
+ * @returns boolean
+ */
+export const isValidPassword = (password, user) =>
+  compareSync(password, user.password);
 
-export const isValidPassword = (user, password) =>
-  bcrypt.compareSync(password, user.password);
+const isNumberValid = (number) =>
+  (typeof number === "number" && number > 0) ||
+  (typeof number === "string" && number.trim() !== "" && !isNaN(number));
 
-export const createResponse = (res, statusCode, data) => {
-  return res.status(statusCode).json({ data });
+export const areProductFieldsValid = ({
+  title,
+  description,
+  price,
+  category,
+  code,
+  stock,
+}) => {
+  if (typeof title !== "string" || !title) return false;
+  if (typeof description !== "string" || !description) return false;
+  if (typeof code !== "string" || !code) return false;
+  if (typeof category !== "string" || !category) return false;
+  if (!isNumberValid(price)) return false;
+  if (!isNumberValid(stock)) return false;
+
+  return true;
 };
 
-// import {dirname} from 'path';   
-// import { fileURLToPath } from 'url';
-// import bcrypt from 'bcrypt'
-// import MongoStore from 'connect-mongo'
-// export const __dirname = dirname(fileURLToPath(import.meta.url))
-// import { connectionString } from "./daos/mongodb/connection.js";
+export const stringToBoolean = (string) => {
+  if (string === "true") return true;
+  if (string === "false") return false;
+  return null;
+};
 
-// //Metodos que vamos a usar de bcrypt
+export const createResponse = (res, statusCode, data) =>
+  res.status(statusCode).json({ data });
 
-// /**
-//  * 
-//  * @param {*} password string
-//  * @returns password hasheada -> string
-//  * @example
-//  * createHash('1234') 
-//  */
+export const splitITemsByStock = (items) =>
+  items.reduce(
+    (acc, item) => {
+      if (item.quantity <= item.product.stock) acc.available.push(item);
+      else acc.unavailable.push(item);
 
-// //Registro:
-// export const hashPassword=(password)=>bcrypt.hashSync(password,bcrypt.genSaltSync(10))
+      return acc;
+    },
+    {
+      available: [],
+      unavailable: [],
+    }
+  );
 
+export const formatMoney = (number) => {
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "ARS",
+  });
 
-// //Login:
-
-// /**
-//  * Método que compara password hasheada con password de login
-//  * @param {*} user 
-//  * @param {*} password 
-//  * @returns boolean
-//  */
-
-
-// // export const isValidPassword = (user, password) => bcrypt.compareSync(password, user.password);
-// export const isValidPassword=(user,password)=>bcrypt.compareSync(password,user.password)
-
-
-// export const createResponse=(res,statusCode,data)=>{
-//   return res.status(statusCode).json({data})
-// }
-// // !Primero recibe la contraseña el string plano y luego la hasheada
-
-// export default __dirname
-
-
-// export const stringToBoolean = (string) => {
-//     if (string === "true") return true;
-//     if (string === "false") return false;
-//     return null;
-//   };
-
-
-
-// export  const mongoStoreOptions = {
-//     store: MongoStore.create({
-//       mongoUrl: connectionString,
-//       // crypto: {
-//       //   secret: "1234",
-//       // },
-//     }),
-//     secret: "1234",
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: {
-//       maxAge: 60000,
-//     },
-//   };
-
+  return formatter.format(number);
+};

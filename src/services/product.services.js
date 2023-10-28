@@ -1,16 +1,51 @@
 import Services from "./class.services.js";
+import factory from "../persistence/daos/factory.js";
 
-// import ProductDaoMongo from "../daos/mongodb/product.dao.js";
-// const prodDao = new ProductDaoMongo();
+const { productDao } = factory;
 
-import ProductDaoFS from "../daos/fileSystem/product.dao.js";
-const prodDao = new ProductDaoFS();
+export default class ProductServices extends Services {
+  constructor() {
+    super(productDao);
+  }
 
-export default class ProductService extends Services {
-    constructor() {
-        super(prodDao);
+  async getAllPaginated(options) {
+    try {
+      const response = await productDao.getAllPaginated(options);
+
+      const result = {
+        payload: response.docs,
+        status: "success",
+        totalPages: response.totalPages,
+        prevPage: response.prevPage,
+        nextPage: response.nextPage,
+        page: response.page,
+        hasPrevPage: response.hasPrevPage,
+        hasNextPage: response.hasNextPage,
+        prevLink: response.hasPrevPage
+          ? `http://localhost:8080/views/products?page=${response.prevPage}`
+          : null,
+        nextLink: response.hasNextPage
+          ? `http://localhost:8080/views/products?page=${response.nextPage}`
+          : null,
+      };
+
+      return result;
+    } catch (error) {
+      console.log(error);
     }
-};
-// import ProductDaoMongo from "../daos/mongodb/product.dao.js";
-// const productDao = new ProductDaoMongo();
+  }
 
+  async create(product) {
+    try {
+      const products = await productDao.getAll();
+
+      if (products.find((p) => p.code === product.code))
+        throw new Error("Product already exists");
+
+      const newProduct = await productDao.create(product);
+      return newProduct || false;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}

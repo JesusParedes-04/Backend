@@ -1,14 +1,32 @@
 import { Router } from "express";
-import ProductController from '../controllers/product.controllers.js' 
-const controller = new ProductController();
+import * as controller from "../controllers/product.controller.js";
+import { uploader } from "../middlewares/multer.js";
+import validateProduct from "../middlewares/validateProductFields.js";
+import requireAuth from "../middlewares/requireAuth.js";
+import authorize from "../middlewares/authorize.js";
+
 const router = Router();
 
-router
-.get('/', controller.getAll)
-.get('/:id', controller.getById)
-.post('/', controller.create)
-.put('/:id', controller.update)
-.delete('/:id', controller.delete)
+router.get("/", controller.getAll);
 
+router.get("/:id", controller.getById);
 
-export default router
+router.post(
+  "/",
+  requireAuth,
+  authorize(["admin"]),
+  uploader.single("thumbnail"),
+  validateProduct,
+  controller.create
+);
+router.put(
+  "/:id",
+  requireAuth,
+  authorize(["admin"]),
+  uploader.single("thumbnail"),
+  validateProduct,
+  controller.update
+);
+router.delete("/:id", requireAuth, authorize(["admin"]), controller.remove);
+
+export default router;
