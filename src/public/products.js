@@ -28,9 +28,9 @@
           text: `Product added to cart`,
           destination: `/carts`,
           duration: 10000,
-          gravity: "Bottom",
+          gravity: "bottom",
           position: "right",
-          backgroundColor: "#4CAF50",
+          backgroundColor: "#87ceeb",
           stopOnFocus: false,
         }).showToast();
       } catch (error) {
@@ -38,9 +38,9 @@
         Toastify({
           text: `${error}`,
           duration: 10000,
-          gravity: "Bottom",
+          gravity: "bottom",
           position: "right",
-          backgroundColor: "#F44336",
+          backgroundColor: "#87ceeb",
           stopOnFocus: false,
         }).showToast();
       }
@@ -57,9 +57,9 @@
     Toastify({
       text: "User logged in successfully",
       duration: 10000,
-      gravity: "Bottom",
+      gravity: "bottom",
       position: "right",
-      backgroundColor: "#4CAF50",
+      backgroundColor: "#87ceeb",
       stopOnFocus: false,
     }).showToast();
 
