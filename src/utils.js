@@ -70,7 +70,7 @@ export const splitITemsByStock = (items) =>
 export const formatMoney = (number) => {
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "ARS",
+    currency: "USD",
   });
 
   return formatter.format(number);
