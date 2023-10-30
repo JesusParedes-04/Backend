@@ -7,7 +7,7 @@ import { errorHandler } from "./middlewares/errorHandler.js";
 import { __dirname } from "./utils.js";
 import routes from "./routes/index.js";
 import "./passport/jwt-strategy.js";
-
+import socketManager from './sockets/chat.socket.js'
 const app = express();
 
 const PORT = 8080;
@@ -27,6 +27,8 @@ app.use(passport.initialize());
 
 app.use("/", routes);
 
-app.listen(PORT, () => {
+const httpServer = app.listen(PORT, () => {
   console.log(`Server ok en puerto ${PORT}`);
 });
+
+socketManager(httpServer)

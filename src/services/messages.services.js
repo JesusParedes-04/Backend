@@ -1,5 +1,4 @@
-import MessageDaoMongo from "../daos/mongodb/messages.dao.js";
-import Services from "./class.services.js";
+import MessageDaoMongo from "../persistence/daos/mongodb/messages.dao.js";
 
 
 const messageDao = new MessageDaoMongo()

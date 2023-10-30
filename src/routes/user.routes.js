@@ -15,4 +15,5 @@ router.post("/login-front", controller.loginFront);
 router.get("/logout", controller.logout);
 router.get("/logout-front", controller.logoutFront);
 
+
 export default router;

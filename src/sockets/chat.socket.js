@@ -1,5 +1,5 @@
 import { Server } from "socket.io";
-import MessageManager from "../daos/mongodb/messages.dao.js"; 
+import MessageManager from "../persistence/daos/mongodb/messages.dao.js"; 
 const messagesDao = new MessageManager();
 
 const socketManager = (httpServer) => {

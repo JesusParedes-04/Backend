@@ -5,7 +5,6 @@ import viewsRouter from "./views.routes.js";
 import userRouter from "./user.routes.js";
 import ticketRouter from "./ticket.routes.js";
 import sessionRouter from "./session.routes.js";
-
 const router = Router();
 
 router.use("/api/products", productRouter);
