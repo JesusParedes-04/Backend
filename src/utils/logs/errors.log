@@ -1,0 +1,32 @@
+Invalid log information
+error | 2023-11-07 12:58:34 | Este es un mensaje de error
+error | 2023-11-07 13:00:42 | Este es un mensaje de error
+error | 2023-11-07 13:00:42 | Este es un mensaje de error
+error | 2023-11-07 13:00:42 | Este es un mensaje de error
+error | 2023-11-07 13:00:42 | Este es un mensaje de error
+error | 2023-11-07 13:00:42 | Este es un mensaje de error
+error | 2023-11-07 13:00:42 | Este es un mensaje de error
+error | 2023-11-07 13:00:42 | Este es un mensaje de error
+fatal | 2023-11-07 13:00:57 | Este es un mensaje de error
+error | 2023-11-07 13:00:57 | Este es un mensaje de error
+error | 2023-11-07 13:00:57 | Este es un mensaje de error
+error | 2023-11-07 13:00:57 | Este es un mensaje de error
+error | 2023-11-07 13:00:57 | Este es un mensaje de error
+error | 2023-11-07 13:00:57 | Este es un mensaje de error
+error | 2023-11-07 13:00:57 | Este es un mensaje de error
+fatal | 2023-11-07 13:01:07 | Este es un mensaje de error
+error | 2023-11-07 13:01:07 | Este es un mensaje de error
+error | 2023-11-07 13:01:07 | Este es un mensaje de error
+error | 2023-11-07 13:01:07 | Este es un mensaje de error
+error | 2023-11-07 13:01:07 | Este es un mensaje de error
+error | 2023-11-07 13:01:07 | Este es un mensaje de error
+fatal | 2023-11-07 13:13:41 | This's a FATAL message
+error | 2023-11-07 13:13:41 | This's a ERROR message
+error | 2023-11-07 13:13:58 | This's a ERROR message
+fatal | 2023-11-07 13:13:58 | This's a FATAL message
+error | 2023-11-07 13:14:04 | This's a ERROR message
+fatal | 2023-11-07 13:14:04 | This's a FATAL message
+fatal | 2023-11-07 13:14:28 | This's a FATAL message
+error | 2023-11-07 13:14:28 | This's a ERROR message
+fatal | 2023-11-07 13:18:52 | This's a FATAL message
+error | 2023-11-07 13:18:52 | This's a ERROR message
