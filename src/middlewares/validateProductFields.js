@@ -1,4 +1,4 @@
-import { areProductFieldsValid } from "../utils.js";
+import { areProductFieldsValid } from "../utils/utils.js";
 
 const validateProduct = (req, res, next) => {
   const isProductValid = areProductFieldsValid(req.body);

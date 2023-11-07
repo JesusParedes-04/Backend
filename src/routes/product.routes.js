@@ -8,7 +8,7 @@ import authorize from "../middlewares/authorize.js";
 const router = Router();
 
 router.get("/", controller.getAll);
-
+router.get("/mockingproducts", controller.getProdMock)
 router.get("/:id", controller.getById);
 
 router.post(
@@ -28,5 +28,6 @@ router.put(
   controller.update
 );
 router.delete("/:id", requireAuth, authorize(["admin"]), controller.remove);
+
 
 export default router;

@@ -1,5 +1,5 @@
 import MongoDao from "./mongo.dao.js";
-import { createHash, isValidPassword } from "../../../utils.js";
+import { createHash, isValidPassword } from "../../../utils/utils.js";
 import { UserModel } from "./models/user.model.js";
 import CartDao from "./cart.dao.js";
 

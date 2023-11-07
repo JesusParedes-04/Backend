@@ -1,5 +1,6 @@
 import Services from "./class.services.js";
 import factory from "../persistence/daos/factory.js";
+import { generateProducts } from "../utils/utils.js";
 
 const { productDao } = factory;
 
@@ -48,4 +49,15 @@ export default class ProductServices extends Services {
       console.log(error);
     }
   }
+
+  async getProdMock() {
+    try {
+      const products = generateProducts(100);
+      return products;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+
 }

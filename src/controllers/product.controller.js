@@ -1,5 +1,5 @@
 import ProductServices from "../services/product.services.js";
-import { stringToBoolean } from "../utils.js";
+import { stringToBoolean } from "../utils/utils.js";
 
 const service = new ProductServices();
 
@@ -75,5 +75,14 @@ export const remove = async (req, res, next) => {
     res.json(removedProduct);
   } catch (error) {
     next(error.message);
+  }
+};
+
+export const getProdMock = async (req, res, next) => {
+  try {
+    const products = await service.getProdMock();
+    res.status(200).json(products);
+  } catch (error) {
+    next(error);
   }
 };

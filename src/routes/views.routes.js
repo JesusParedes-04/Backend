@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { optionalAuth } from "../middlewares/optionalAuth.js";
 import * as controller from "../controllers/view.controller.js";
-import {__dirname } from "../utils.js";
+import {__dirname } from "../utils/utils.js";
 import { getAllMessages } from "../services/messages.services.js";
 const router = Router();
 

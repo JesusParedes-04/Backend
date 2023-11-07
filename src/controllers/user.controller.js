@@ -1,5 +1,5 @@
 import UserService from "../services/user.services.js";
-import { createResponse } from "../utils.js";
+import { createResponse } from "../utils/utils.js";
 import Controller from "./class.controller.js";
 import { sendEmailWithTemplate } from "../services/email.services.js";
 import { successfulRegisterTemplate } from "../templates/email.templates.js";

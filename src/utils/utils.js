@@ -1,7 +1,9 @@
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { hashSync, compareSync, genSaltSync } from "bcrypt";
+import { faker } from "@faker-js/faker";
 
+faker.locale = "es";
 export const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /**
@@ -75,3 +77,28 @@ export const formatMoney = (number) => {
 
   return formatter.format(number);
 };
+
+
+const generateProduct = () => ({
+  _id: faker.datatype.uuid(),
+  title: faker.commerce.productName(),
+  description: faker.commerce.productDescription(),
+  price: faker.commerce.price(),
+  category: faker.commerce.department(),
+  code: faker.datatype.number(),
+  stock: faker.datatype.number(),
+  status: faker.datatype.boolean(),
+  thumbnails: Array.from({ length: 3 }, () => faker.image.imageUrl()),
+});
+
+export const generateProducts = (count = 100) =>
+  Array.from({ length: count }, generateProduct);
+
+
+  export const throwError = (status = 500, message) => {
+    console.log("throwError", status, message);
+    const error = new Error(message);
+    error.status = status;
+    console.log("throwError", error.status);
+    throw error;
+  };

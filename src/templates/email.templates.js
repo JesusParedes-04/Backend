@@ -1,4 +1,4 @@
-import { formatMoney } from "../utils.js";
+import { formatMoney } from "../utils/utils.js";
 
 export const successfulPurchaseTemplate = ({
   amount,

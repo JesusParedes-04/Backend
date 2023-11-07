@@ -4,7 +4,7 @@ import morgan from "morgan";
 import passport from "passport";
 import cookieParser from "cookie-parser";
 import { errorHandler } from "./middlewares/errorHandler.js";
-import { __dirname } from "./utils.js";
+import { __dirname } from "./utils/utils.js";
 import routes from "./routes/index.js";
 import "./passport/jwt-strategy.js";
 import socketManager from './sockets/chat.socket.js'

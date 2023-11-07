@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import Services from "./class.services.js";
 import factory from "../persistence/daos/factory.js";
-import { splitITemsByStock } from "../utils.js";
+import { splitITemsByStock } from "../utils/utils.js";
 
 const { ticketDao, productDao, cartDao } = factory;
 
