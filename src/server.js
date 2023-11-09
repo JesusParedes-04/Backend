@@ -9,17 +9,24 @@ import routes from "./routes/index.js";
 import "./passport/jwt-strategy.js";
 import socketManager from './sockets/chat.socket.js'
 import logger from "./utils/logger.js";
+import swaggerUI from 'swagger-ui-express'
+import swaggerJSDoc from "swagger-jsdoc";
+import { info } from "./docs/info.js";
 
 const app = express();
 
+const specs = swaggerJSDoc(info)
+
 const PORT = 8080;
 
+app.use ('/docs', swaggerUI.serve, swaggerUI.setup(specs))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(errorHandler);
 app.use(morgan("dev"));
 app.use(express.static(__dirname + "/public"));
+
 
 app.engine("handlebars", handlebars.engine());
 app.set("view engine", "handlebars");

@@ -1,0 +1,14 @@
+paths:
+  /api/products:
+    post:
+      tags:
+      - Products
+    summary: Crea un nuevo producto
+    requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/parameters/schemas/ProductsCommerce"
+        required: true
+
+       

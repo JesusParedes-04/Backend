@@ -1,5 +1,5 @@
 import { createLogger, format, transports, addColors } from "winston";
-import { LOG_ENV, } from "../config.js";
+import { LOG_ENV} from "../config.js";
 import { __dirname } from "./utils.js";
 
 const { combine, printf, timestamp, colorize } = format;

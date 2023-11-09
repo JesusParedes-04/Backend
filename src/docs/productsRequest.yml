@@ -1,0 +1,55 @@
+components:
+  parameters:
+    schemas:
+      ProductsCommerce:
+        type: object
+        required:
+        -title
+        -description
+        -price
+        -category
+        -code
+        -stock
+        -thumbnails
+        -status
+    properties:
+        title:
+          type: string
+          maxLength: 100
+          description: El título del producto.
+        description:
+          type: string
+          maxLength: 100
+          description: La descripción del producto.
+        price:
+          type: number
+          description: El precio del producto.
+        category:
+          type: string
+          maxLength: 100
+          description: La categoría del producto.
+        code:
+          type: string
+          maxLength: 100
+          uniqueItems: true
+          description: El código del producto.
+        stock:
+          type: integer
+          description: La cantidad de stock disponible del producto.
+        thumbnails:
+          type: array
+          items:
+            type: string
+          description: Una lista de URLs de imágenes en miniatura del producto.
+        status:
+          type: boolean
+          description: El estado del producto (activo/inactivo).
+    example:
+          title: Silla pino blanca
+          description: Silla de madera de pino blanca
+          price: 5000
+          category: Cat1
+          code: PT001
+          stock: 1
+          thumbnails: [./img1.jpg, ./img2.jpg]
+          status: true
