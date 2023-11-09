@@ -24,18 +24,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schema/products/validationError"
+                $ref: "#/components/schema/validationError"
 
         500:
           description: Server error message
           content:
             application/json:
               schema:
-                $ref: "#/components/schema/products/notFound"
+                $ref: "#/components/schema/notFound"
 
     get:
         tags:
-        - Products
+        - products
         summary: Get a list of all products
         responses:
         200:
@@ -50,19 +50,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schema/products/validationError"
+                $ref: "#/components/schema/validationError"
 
         500:
           description: Server error message
           content:
             application/json:
               schema:
-                $ref: "#/components/schema/products/notFound"
+                $ref: "#/components/schema/notFound"
 
   api/products/{id}:
     get:
         tags:
-          - Products
+          - products
         summary: Get products
         parameters:
           - in: path
@@ -84,24 +84,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schema/products/validationError"
+                $ref: "#/components/schema/validationError"
 
         500:
           description: Server error message
           content:
             application/json:
               schema:
-                $ref: "#/components/schema/products/notFound"
+                $ref: "#/components/schema/notFound"
     put:
       tags:
-        - Products
+        - products
       summary: Update data of a product looking for a product with the id
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/parameters/schemas/Products"
-        required: true
       parameters:
         - in: path
           name: id
@@ -122,17 +116,17 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schema/products/validationError"
+                $ref: "#/components/schema/validationError"
 
         500:
           description: Server error message
           content:
             application/json:
               schema:
-                $ref: "#/components/schema/products/notFound"
+                $ref: "#/components/schema/notFound"
     delete:
       tags:
-        - Products
+        - products
       summary: Dalete a product from de data base 
       parameters:
         - in: path
@@ -154,18 +148,353 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schema/products/validationError"
+                $ref: "#/components/schema/validationError"
 
         500:
           description: Server error message
           content:
             application/json:
               schema:
-                $ref: "#/components/schema/products/notFound"
+                $ref: "#/components/schema/notFound"
+
+  api/cart:
+      get:
+        tags:
+          - Cart
+        summary: Get a list of all cart
+        responses:
+          200:
+            description: List of all cart
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/Cart/getCart"
+
+          404:
+            description: Not found message
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/notFound"
+
+          500:
+            description: Server error message
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/validationError"
+
+      post:
+        tags:
+          - Cart
+        summary: Create a new Cart
+        responses:
+          200:
+            description: New Cart created successfully
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/Cart/getCart"
+
+          404:
+            description: Not found message
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/notFound"
+
+          500:
+            description: Server error message
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/validationError"
+
+  /api/cart/{id}:
+      get:
+        tags:
+          - Cart
+        summary: Get a cart by id
+        parameters:
+          - in: path
+            name: id
+            required: true
+            description: Cart id
+            schema:
+              type: string
+        responses:
+          200:
+            description: Cart found successfully
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/Cart/getCart"
+
+          404:
+            description: Not found message
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/notFound"
+
+          500:
+            description: Server error message
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/validationError"
+
+      delete:
+        tags:
+          - Cart
+        summary: Clean a Cart
+        parameters:
+          - in: path
+            name: id
+            required: true
+            description: Cart id
+            schema:
+              type: string
+        responses:
+          200:
+            description: Cart cleaned successfully
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/Cart/cleanCart"
+
+          404:
+            description: Not found message
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/notFound"
+
+          500:
+            description: Server error message
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/validationError"
+
+      put:
+        tags:
+          - Cart
+        summary: Update a Cart
+        parameters:
+          - in: path
+            name: id
+            required: true
+            description: Cart id
+            schema:
+              type: string
+        responses:
+          200:
+            description: Cart updated successfully
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/Cart/updateCart"
+
+          404:
+            description: Not found message
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/notFound"
+
+          500:
+            description: Server error message
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/validationError"
+
+  /api/cart/{id}/prod/{productId}:
+      post:
+        tags:
+          - Cart
+        summary: Add a product to the cart
+        parameters:
+          - in: path
+            name: id
+            required: true
+            description: Cart id
+            schema:
+              type: string
+          - in: path
+            name: productId
+            required: true
+            description: Product id
+            schema:
+              type: string
+        responses:
+          200:
+            description: Product added successfully
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/Cart/saveProductToCart"
+
+          404:
+            description: Not found message
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/notFound"
+
+
+          500:
+            description: Server error message
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/validationError"
+
+      delete:
+        tags:
+          - Cart
+        summary: Delete product from Cart
+        parameters:
+          - in: path
+            name: id
+            required: true
+            description: Cart id
+            schema:
+              type: string
+          - in: path
+            name: productId
+            required: true
+            description: Product id
+            schema:
+              type: string
+        responses:
+          200:
+            description: Product was successfully deleted
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/Cart/deleteProductInCart"
+
+          404:
+            description: Not found message
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/notFound"
+
+          500:
+            description: Server error message
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/validationError"
+
+      put:
+        tags:
+          - Cart
+        summary: Update quantity of a product in the cart
+        parameters:
+          - in: path
+            name: id
+            required: true
+            description: Cart id
+            schema:
+              type: string
+          - in: path
+            name: productId
+            required: true
+            description: Product id
+            schema:
+              type: string
+        responses:
+          200:
+            description: Quantity updated successfully
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/Cart/updateQuantityInCart"
+
+          404:
+            description: Not found message
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/notFound"
+
+          500:
+            description: Server error message
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/validationError"
+
+    
+  /api/cart/{id}/purchase:
+      post:
+        tags:
+          - Cart
+        summary: Generates purchase instrcting ID of cart
+        parameters:
+          - in: path
+            name: id
+            required: true
+            description: Cart id
+            schema:
+              type: string
+        responses:
+          200:
+            description: Purchase generated successfully
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/Cart/generateTicket"
+
+          404:
+            description: Not found message
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/notFound"
+
+          500:
+            description: Server error message
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/validationError"
+
+    
+  /api/cart/purchase:
+      post:
+        tags:
+          - Cart
+        summary: Generates purchase detecting the user's cart ID
+        responses:
+          200:
+            description: Purchase generated successfully
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/Cart/generateTicket"
+
+          404:
+            description: Not found message
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/notFound"
+
+
+          500:
+            description: Server error message
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schema/validationError"
 
 
 
 
 
-
- 
+  

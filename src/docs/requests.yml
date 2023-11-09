@@ -3,8 +3,7 @@ components:
     schemas:
       products:
         type: object
-        required:
-          -title
+        required: -title
           -description
           -price
           -category
@@ -13,31 +12,31 @@ components:
           -thumbnails
           -status
         properties:
-          title: 
+          title:
             type: string
             description: Name of the product
-          description: 
+          description:
             type: string
             description: Description of the product
-          price: 
+          price:
             type: number
             description: Price of the product
-          category: 
+          category:
             type: string
             description: Category of the product
-          code: 
+          code:
             type: string
             description: Code of the product
-          stock: 
+          stock:
             type: number
             description: Stock of the product
-          thumbnails: 
+          thumbnails:
             type: array
             description: Image of the product
-          status: 
-            type: boolean 
+          status:
+            type: boolean
             description: Status of the product
-        example: 
+        example:
           title: Samsung A33
           description: Celular Gama Media
           price: 1500
@@ -46,21 +45,22 @@ components:
           stock: 22
           thumbnails: https://randomphone
           status: true
-      
-      cartProduct:
+
+        
+      CartProduct:
         type: object
         required:
-          -product
+          -productID
           -quantity
         properties:
-          product:
+          productID:
             type: string
             description: ID of the product that is in the cart
           quantity:
             type: number
             description: Quantity of the product 
         example:
-          product: 5f4e23c976f099001f995a3a
+          productID: 5f4e23c976f099001f995a3a
           quantity: 2
 
       Cart:
