@@ -1,0 +1,294 @@
+   components:
+    schema:
+      products:
+        postProducts:
+            type: object
+            properties:
+                _id:
+                  type: string
+                  description: Mongo ID
+                title:
+                  type: string
+                  description: name of the product
+                description:
+                  type: string
+                  description: description of the product
+                price:
+                  type: number
+                  description: price of the product
+                category:
+                  type: string
+                  description: category of the product
+                code:
+                  type: string
+                  description: code of the product
+                stock:
+                  type: number
+                  description: stock of the product
+                thumbnails:
+                  type: array
+                  description: image of the product
+                status:
+                  type: boolean
+                  description: status of the product
+            example:
+                _id: 64bf22c4ff8965169aaf06e0
+                title: Samsung A3
+                description: Loremipsum.
+                price: 1500
+                category: phone
+                code: HC011
+                stock: 22
+                thumbnails: [ "xxxx" , "yyxxx" ]
+                status: true
+        getProducts:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: Mongo ID
+                example: 64bf22c4ff8965169aaf06e0
+              title:
+                type: string
+                description: name of the product
+                example: Samsung A33
+
+              description:
+                type: string
+                description: description of the product
+                example: LoremIpsum
+
+              price:
+                type: number
+                description: price of the product
+                example: 4000
+
+              category:
+                type: string
+                description: categoty of the product
+                example: phone
+
+              code:
+                type: string
+                description: code of the product
+                example: A312
+
+              stock:
+                type: number
+                description: stock of the product
+                example: 12
+
+              thumbnails:
+                type: array
+                description: image of the product
+                example: ['xxxx', 'yyyy']
+              status:
+                type: boolean
+                description: status of the product
+                example: true
+            example:
+              _id: 64bf22c4ff8965169aaf06e0
+              title: Samsung A3
+              description: Loremipsum.
+              price: 1500
+              category: phone
+              code: HC011
+              stock: 22
+              thumbnails: [ "xxxx" , "yyxxx" ]
+              status: true
+        getIdProducts: 
+            type: object
+            properties:
+              _id:
+                type: string
+                description: Mongo ID
+                example: 64bf22c4ff8965169aaf06e0
+              title:
+                type: string
+                description: name of the product
+                example: Samsung A33
+
+              description:
+                type: string
+                description: description of the product
+                example: LoremIpsum
+
+              price:
+                type: number
+                description: price of the product
+                example: 4000
+
+              category:
+                type: string
+                description: categoty of the product
+                example: phone
+
+              code:
+                type: string
+                description: code of the product
+                example: A312
+
+              stock:
+                type: number
+                description: stock of the product
+                example: 12
+
+              thumbnails:
+                type: array
+                description: image of the product
+                example: ['xxxx', 'yyyy']
+              status:
+                type: boolean
+                description: status of the product
+                example: true
+            example:
+              _id: 64bf22c4ff8965169aaf06e0
+              title: Samsung A3
+              description: Loremipsum.
+              price: 1500
+              category: phone
+              code: HC011
+              stock: 22
+              thumbnails: [ "xxxx" , "yyxxx" ]
+              status: true       
+        updateProducts:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: Mongo ID
+                example: 64bf22c4ff8965169aaf06e0
+              title:
+                type: string
+                description: name of the product
+                example: Samsung A33
+
+              description:
+                type: string
+                description: description of the product
+                example: LoremIpsum
+
+              price:
+                type: number
+                description: price of the product
+                example: 4000
+
+              category:
+                type: string
+                description: categoty of the product
+                example: phone
+
+              code:
+                type: string
+                description: code of the product
+                example: A312
+
+              stock:
+                type: number
+                description: stock of the product
+                example: 12
+
+              thumbnails:
+                type: array
+                description: image of the product
+                example: ['xxxx', 'yyyy']
+              status:
+                type: boolean
+                description: status of the product
+                example: true
+            example:
+              _id: 64bf22c4ff8965169aaf06e0
+              title: Samsung A3
+              description: Loremipsum.
+              price: 1500
+              category: phone
+              code: HC011
+              stock: 22
+              thumbnails: [ "xxxx" , "yyxxx" ]
+              status: true
+        deleteProducts:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: Mongo ID
+                example: 64bf22c4ff8965169aaf06e0
+              title:
+                type: string
+                description: name of the product
+                example: Samsung A33
+
+              description:
+                type: string
+                description: description of the product
+                example: LoremIpsum
+
+              price:
+                type: number
+                description: price of the product
+                example: 4000
+
+              category:
+                type: string
+                description: categoty of the product
+                example: phone
+
+              code:
+                type: string
+                description: code of the product
+                example: A312
+
+              stock:
+                type: number
+                description: stock of the product
+                example: 12
+
+              thumbnails:
+                type: array
+                description: image of the product
+                example: ['xxxx', 'yyyy']
+              status:
+                type: boolean
+                description: status of the product
+                example: true
+            example:
+              _id: 64bf22c4ff8965169aaf06e0
+              title: Samsung A3
+              description: Loremipsum.
+              price: 1500
+              category: phone
+              code: HC011
+              stock: 22
+              thumbnails: [ "xxxx" , "yyxxx" ]
+              status: true
+        validationError:
+          type: object
+          properties: 
+            msg:
+              type: string
+              description: Error de validacion de schema
+          example:
+            msg: Validation Schema error
+        notFound:
+          type: object
+          properties:
+          msg:
+            type: string
+            description: Error de servidor
+          example:
+            msg: Error de servidor    
+        errorGetbyId:
+          type: object
+          properties:
+            msg:
+              type: string
+              description: Error de servidor
+          example:
+            msg: no se encontro el producto con id especificado
+      
+   
+
+
+
+
+      

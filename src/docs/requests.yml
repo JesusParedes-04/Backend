@@ -1,0 +1,73 @@
+components:
+  parameters:
+    schemas:
+      products:
+        type: object
+        required:
+          -title
+          -description
+          -price
+          -category
+          -code
+          -stock
+          -thumbnails
+          -status
+        properties:
+          title: 
+            type: string
+            description: Name of the product
+          description: 
+            type: string
+            description: Description of the product
+          price: 
+            type: number
+            description: Price of the product
+          category: 
+            type: string
+            description: Category of the product
+          code: 
+            type: string
+            description: Code of the product
+          stock: 
+            type: number
+            description: Stock of the product
+          thumbnails: 
+            type: array
+            description: Image of the product
+          status: 
+            type: boolean 
+            description: Status of the product
+        example: 
+          title: Samsung A33
+          description: Celular Gama Media
+          price: 1500
+          category: Celular
+          code: HC011
+          stock: 22
+          thumbnails: https://randomphone
+          status: true
+      
+      cartProduct:
+        type: object
+        required:
+          -product
+          -quantity
+        properties:
+          product:
+            type: string
+            description: ID of the product that is in the cart
+          quantity:
+            type: number
+            description: Quantity of the product 
+        example:
+          product: 5f4e23c976f099001f995a3a
+          quantity: 2
+
+      Cart:
+        type: array  
+        description: Carts of user
+        items:
+          $ref: '#/components/parameters/schemas/CartProduct'
+        example:
+          id_: 650a770add40087430f909a8
+          products: []
