@@ -72,11 +72,11 @@ const logger = createLogger({
 });
 
 
-logger.fatal("This's a FATAL message");
-logger.error("This's a ERROR message");
-logger.warning("This's a WARNING message");
-logger.info("This's a INFO message");
-logger.http("This's a HTTP message");
-logger.debug("This's a DEBUG message");
+// logger.fatal("This's a FATAL message");
+// logger.error("This's a ERROR message");
+// logger.warning("This's a WARNING message");
+// logger.info("This's a INFO message");
+// logger.http("This's a HTTP message");
+// logger.debug("This's a DEBUG message");
 
 export default logger;

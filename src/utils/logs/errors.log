@@ -85,3 +85,5 @@ fatal | 2023-11-08 20:26:18 | This's a FATAL message
 error | 2023-11-08 20:26:18 | This's a ERROR message
 fatal | 2023-11-08 21:39:00 | This's a FATAL message
 error | 2023-11-08 21:39:00 | This's a ERROR message
+fatal | 2023-11-08 21:48:56 | This's a FATAL message
+error | 2023-11-08 21:48:56 | This's a ERROR message
