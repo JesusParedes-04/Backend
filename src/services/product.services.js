@@ -1,6 +1,6 @@
 import Services from "./class.services.js";
 import factory from "../persistence/daos/factory.js";
-import { generateProducts } from "../utils/utils.js";
+import { generateProducts } from "../utils.js";
 
 const { productDao } = factory;
 

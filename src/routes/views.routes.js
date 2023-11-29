@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { optionalAuth } from "../middlewares/optionalAuth.js";
 import * as controller from "../controllers/view.controller.js";
-import {__dirname } from "../utils/utils.js";
 import { getAllMessages } from "../services/messages.services.js";
+import authorize from "../middlewares/authorize.js";
 const router = Router();
 
 router.get("/products", optionalAuth, controller.productsView);
@@ -11,6 +11,7 @@ router.get("/register", controller.registerView);
 router.get("/error-register", controller.errorRegisterView);
 router.get("/login", controller.loginView);
 router.get("/error-login", controller.errorLoginView);
+router.get("/adminUsers", controller.adminUsersView)
 
 router.get('/chat', async (req, res) => {
     try {
@@ -20,6 +21,5 @@ router.get('/chat', async (req, res) => {
       res.status(500).json({ message: error.message });
     }
   });
-
 
 export default router;

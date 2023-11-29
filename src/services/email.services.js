@@ -16,7 +16,7 @@ export const sendEmailWithText = async ({ email, subject, text }) => {
     await transporter.sendMail({
       from: EMAIL,
       to: email,
-      subject,
+      subject: 'Bienvenido/a',
       text,
     });
   } catch (error) {
@@ -34,5 +34,7 @@ export const sendEmailWithTemplate = async ({ email, subject, html }) => {
     });
   } catch (error) {
     console.log(error);
-  }
-};
+  }}
+
+
+

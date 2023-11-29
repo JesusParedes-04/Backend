@@ -1,8 +1,10 @@
 import UserService from "../services/user.services.js";
-import { createResponse } from "../utils/utils.js";
+import { createResponse } from "../utils.js";
 import Controller from "./class.controller.js";
-import { sendEmailWithTemplate } from "../services/email.services.js";
+import { sendEmailWithTemplate, sendEmailWithText } from "../services/email.services.js";
 import { successfulRegisterTemplate } from "../templates/email.templates.js";
+import { UserModel } from '../persistence/daos/mongodb/models/user.model.js'
+import UserResDTO from '../persistence/DTOs/user.res.dto.js';
 
 const userService = new UserService();
 export default class UserController extends Controller {
@@ -77,4 +79,50 @@ export default class UserController extends Controller {
     res.clearCookie("token");
     res.redirect("/login");
   };
+
+
+  getUsers = async (req, res) => {
+    try {
+      const users = await UserModel.find({}, 'first_name last_name email role');
+
+      const formattedUsers = users.map(user => new UserResDTO(user));
+
+      return res.status(200).json({ users: formattedUsers });
+    } catch (error) {
+      return res.status(500).json({ error: 'Error al obtener los usuarios' });
+    }
+  };
+
+  inactiveUsers = async (req, res) => {
+    try {
+      // Calcular la fecha para la inactividad de 2 dias
+      const twoDaysAgo = new Date();
+      twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+  
+      const inactiveUsers = await UserModel.find({}, 'email last_connection');
+  
+      // Filtrar los usuarios inactivos por más de 2 días
+      const usersToDelete = inactiveUsers.filter(user => user.last_connection < twoDaysAgo);
+  
+      await Promise.all(
+        usersToDelete.map(async (user) => {
+          
+          await UserModel.findByIdAndDelete(user._id);
+  
+          await sendEmailWithText({
+            email: user.email,
+            subject: 'Eliminación por inactividad',
+            text: 'Tu cuenta ha sido eliminada debido a la inactividad durante los últimos 2 días.',
+          });
+        })
+      );
+  
+      return res.status(200).json({ message: "Usuarios inactivos eliminados correctamente" });
+    } catch (error) {
+      return res.status(500).json({ error: 'Error al eliminar usuarios inactivos' });
+    }
+  };
+  
 }
+
+

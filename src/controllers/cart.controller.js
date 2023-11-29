@@ -1,7 +1,7 @@
 import * as service from "../services/cart.services.js";
 import TicketService from "../services/ticket.services.js";
 import { sendEmailWithTemplate } from "../services/email.services.js";
-import { createResponse, formatMoney } from "../utils/utils.js";
+import { createResponse, formatMoney } from "../utils.js";
 import { successfulPurchaseTemplate } from "../templates/email.templates.js";
 
 const ticketService = new TicketService();

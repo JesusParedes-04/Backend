@@ -1,5 +1,5 @@
 import MongoDao from "./mongo.dao.js";
-import { createHash, isValidPassword } from "../../../utils/utils.js";
+import { createHash, isValidPassword } from "../../../utils.js";
 import { UserModel } from "./models/user.model.js";
 import CartDao from "./cart.dao.js";
 
@@ -19,27 +19,37 @@ export default class UserDao extends MongoDao {
     }
   }
 
+
   async register(user) {
     try {
       const { email, password } = user;
       const existUser = await this.getByEmail(email);
-
+  
       if (!existUser) {
         const isAdmin = email === "admin@coder.com" && password === "admin1234";
-
+  
         const cart = await cartDao.create({ items: [] });
-
-        return await UserModel.create({
+  
+        const newUser = {
           ...user,
-          role: isAdmin ? "admin" : "user",
+          role: isAdmin ? "admin" : "user", 
           password: createHash(password),
           cart: cart._id
-        });
-      } else return false;
+        };
+  
+        if (user.role) {
+          newUser.role = user.role;
+        }
+  
+        return await UserModel.create(newUser);
+      } else {
+        return false;
+      }
     } catch (error) {
       console.log(error);
     }
   }
+
 
   async login(user) {
     try {

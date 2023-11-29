@@ -1,5 +1,5 @@
 import UserRepository from "../persistence/repository/user.repository.js";
-import { createResponse } from "../utils/utils.js";
+import { createResponse } from "../utils.js";
 
 const userRepository = new UserRepository();
 

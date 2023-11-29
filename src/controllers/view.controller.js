@@ -1,5 +1,7 @@
 import ProductService from "../services/product.services.js";
 import * as cartService from "../services/cart.services.js";
+import UserController from "./user.controller.js";
+const userController = new UserController();
 
 const productService = new ProductService();
 
@@ -72,3 +74,13 @@ export const errorLoginView = (req, res) => {
 };
 
 
+export const adminUsersView = async (req, res) => {
+
+  try {
+
+    // Renderiza la plantilla Handlebars con los datos de los usuarios
+    res.render('adminUsers', { title: 'Admin Users', users });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

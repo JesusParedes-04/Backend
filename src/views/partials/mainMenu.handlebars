@@ -5,13 +5,14 @@
           <h1 class="mb-0 text-white">
             TecnoShop
           </h1>
-        </a>
       </div>
    
 <div class="col-md-4 d-flex justify-content-end align-items-center">
   {{#if user }}
+    <button onClick="location.href='/api/users/adminView'" class="btn btn-light" style="margin-right: 10px;">adminView</button>
     <button onclick="location.href='/api/users/logout-front'" class="btn btn-light w-30">Logout</button>
     <button onClick="location.href='/carts'" class="btn btn-light" style="margin-left: 10px;">Cart</button>
+    <button onClick="location.href='/products'" class="btn btn-light" style="margin-left: 10px;">Home</button>
   {{else}}
     <button onclick="location.href='/login'" class="btn btn-light w-50">Login</button>
   {{/if}}

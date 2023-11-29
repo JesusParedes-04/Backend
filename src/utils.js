@@ -4,7 +4,10 @@ import { hashSync, compareSync, genSaltSync } from "bcrypt";
 import { faker } from "@faker-js/faker";
 
 faker.locale = "es";
+
 export const __dirname = dirname(fileURLToPath(import.meta.url));
+
+// export const __dirname = "C:/Users/jjesu/Documents/Backend/PreEntrega/src" ;
 
 /**
  * Método que recibe password sin hashear y retorna password hasheada

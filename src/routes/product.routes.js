@@ -19,6 +19,8 @@ router.post(
   validateProduct,
   controller.create
 );
+
+
 router.put(
   "/:id",
   requireAuth,
@@ -27,7 +29,9 @@ router.put(
   validateProduct,
   controller.update
 );
-router.delete("/:id", requireAuth, authorize(["admin"]), controller.remove);
+
+
+router.delete("/:id", requireAuth, authorize(["admin" , "premium"]), controller.remove);
 
 
 export default router;
