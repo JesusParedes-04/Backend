@@ -9,7 +9,6 @@ const socketManager = (httpServer) => {
     console.log('New Connection!', socket.id);
 
     socket.on('guardarProducto', async (productoData) => {
-      // ... código relacionado con 'guardarProducto'
     });
 
     socket.on('disconnect', () => {

@@ -64,14 +64,12 @@ export const removeProductFromCart = async (id, productId) => {
 
 export const updateCartItems = async (id, items) => {
   try {
-    // validate products exist
     const products = await productDao.getAll();
     const productsIds = products.map((product) => product._id.toString());
     const itemsIds = items.map((item) => item.product.toString());
     const productsExist = itemsIds.every((id) => productsIds.includes(id));
     if (!productsExist) throw new Error("Product not found");
 
-    // validate items format
     const itemsFormat = items.every(
       (item) => item.product && item.quantity >= 0
     );

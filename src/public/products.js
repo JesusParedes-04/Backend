@@ -46,7 +46,6 @@
 })();
 
 (() => {
-  // if query param loginSuccessful is true, show notification
   const urlParams = new URLSearchParams(window.location.search);
   const loginSuccessful = urlParams.get("loginSuccessful");
 
@@ -60,7 +59,6 @@
       stopOnFocus: false,
     }).showToast();
 
-    // remove query param
     window.history.replaceState({}, document.title, "/products");
   }
 })();

@@ -9,7 +9,6 @@ const router = Router();
 
 
 
-// router.get("/", controller.getUsers);
 router.post("/register", controller.register);
 router.post("/register-front", controller.registerFront);
 router.post("/login", controller.login);
@@ -20,6 +19,5 @@ router.delete("/", controller.inactiveUsers)
 router.post("/:id/modify-role", controller.modifyUserRole);
 router.post("/:id/delete", controller.deleteUser);
 
-// router.get("/", requireAuth, authorize(["admin"]), controller.getAll);
 
 export default router;

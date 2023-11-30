@@ -61,7 +61,6 @@ export default class CartsDaoFs {
       const cartFile = await this.getCarts()
       const idCart = cartFile.find(cart => cart.id === id);
 
-      //Ver bien si es idcart o idcart.products
       if (idCart) return idCart
       else { return `ID ${cartId} does not exists` }
     }
