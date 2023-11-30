@@ -11,37 +11,37 @@ router.post("/", controller.create);
 router.post(
   "/:id/product/:productId",
   requireAuth,
-  authorize(["user"]),
+  authorize(["user", "premium"]),
   controller.addProductToCart
 );
 router.delete(
   "/:id/product/:productId",
   requireAuth,
-  authorize(["user"]),
+  authorize(["user", "premium"]),
   controller.removeProductFromCart
 );
 router.put(
   "/:id",
   requireAuth,
-  authorize(["user"]),
+  authorize(["user" , "premium"]),
   controller.updateCartItems
 );
 router.put(
   "/:id/product/:productId",
   requireAuth,
-  authorize(["user"]),
+  authorize(["user" , "premium"]),
   controller.updateProductQuantity
 );
 router.delete(
   "/:id",
   requireAuth,
-  authorize(["user"]),
+  authorize(["user" , "premium"]),
   controller.removeProducts
 );
 router.post(
   "/:id/purchase",
   requireAuth,
-  authorize(["user"]),
+  authorize(["user" , "premium"]),
   controller.purchaseCart
 );
 

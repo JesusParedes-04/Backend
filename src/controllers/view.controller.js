@@ -77,6 +77,12 @@ export const errorLoginView = (req, res) => {
 };
 
 
+export const checkout = (req, res) => {
+  res.render("checkout");
+};
+
+
+
 export const profile = async (req, res, next) => {
   try {
 
