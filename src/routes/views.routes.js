@@ -11,8 +11,7 @@ router.get("/register", controller.registerView);
 router.get("/error-register", controller.errorRegisterView);
 router.get("/login", controller.loginView);
 router.get("/error-login", controller.errorLoginView);
-router.get("/adminUsers", controller.adminUsersView)
-
+router.get('/profile', authorize, controller.profile);
 router.get('/chat', async (req, res) => {
     try {
       const message = await getAllMessages();

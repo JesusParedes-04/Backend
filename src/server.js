@@ -12,7 +12,7 @@ import logger from "./utils/logger.js";
 import swaggerUI from 'swagger-ui-express'
 import swaggerJSDoc from "swagger-jsdoc";
 import { info } from "./docs/info.js";
-
+import exphbs from "express-handlebars";
 const PORT = 8080;
 
 const app = express();
@@ -28,11 +28,15 @@ app.use(errorHandler);
 app.use(morgan("dev"));
 app.use(express.static(__dirname + "/public"));
 
-
 app.engine("handlebars", handlebars.engine());
 app.set("view engine", "handlebars");
 app.set("views", __dirname  + "/views");
+
+
 app.use(passport.initialize());
+
+
+
 
 app.use("/", routes);
 const httpServer = app.listen(PORT, () => {
@@ -40,3 +44,4 @@ const httpServer = app.listen(PORT, () => {
 });
 
 socketManager(httpServer)
+

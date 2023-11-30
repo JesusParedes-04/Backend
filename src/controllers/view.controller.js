@@ -1,9 +1,12 @@
 import ProductService from "../services/product.services.js";
 import * as cartService from "../services/cart.services.js";
-import UserController from "./user.controller.js";
-const userController = new UserController();
-
+import UserController from "../controllers/user.controller.js";
+import UserService from "../services/user.services.js";
+const userController = new UserController()
 const productService = new ProductService();
+import { UserModel } from "../persistence/daos/mongodb/models/user.model.js";
+
+
 
 export const productsView = async (req, res) => {
   try {
@@ -74,13 +77,15 @@ export const errorLoginView = (req, res) => {
 };
 
 
-export const adminUsersView = async (req, res) => {
-
+export const profile = async (req, res, next) => {
   try {
 
-    // Renderiza la plantilla Handlebars con los datos de los usuarios
-    res.render('adminUsers', { title: 'Admin Users', users });
+    const users = await UserModel.find({})
+    const usersHB = users.map ( user => user.toObject() )
+    res.render('profile', {users: usersHB} )
+
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('Error al obtener y mostrar los usuarios:', error);
+    res.status(500).send('Error al obtener los usuarios');
   }
 };

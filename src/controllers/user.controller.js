@@ -123,6 +123,33 @@ export default class UserController extends Controller {
     }
   };
   
-}
+  deleteUser = async (req, res) => {
+    try {
+      const userId = req.params.id;
+      await UserModel.findByIdAndDelete(userId);
+  
+      // Redirigir a /profile si se elimina correctamente el usuario
+      res.redirect(303, '/profile');
+    } catch (error) {
+      return res.status(500).json({ error: 'Error al eliminar el usuario' });
+    }
+  };
+  
+  modifyUserRole = async (req, res) => {
+    try {
+      const userId = req.params.id;
+      const newRole = req.body.newRole;
+  
+      await UserModel.findByIdAndUpdate(userId, { role: newRole });
+  
+      // Redirigir a /profile si se modifica correctamente el rol del usuario
+      res.redirect(303, '/profile');
+    } catch (error) {
+      return res.status(500).json({ error: 'Error al modificar el rol del usuario' });
+    }
+  };
+}  
+
+
 
 

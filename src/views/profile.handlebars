@@ -1,0 +1,28 @@
+  <div class="container">
+    <h1>Lista de Usuarios</h1>
+
+    <ul class="list-group">
+      {{#each users}}
+        <li class="list-group-item">
+          <p><strong>Nombre:</strong> {{this.first_name}}</p>
+          <p><strong>Apellido:</strong> {{this.last_name}}</p>
+          <p><strong>Email:</strong> {{this.email}}</p>
+          <p><strong>Rol Actual:</strong> {{this.role}}</p>
+        
+          <form action="/api/users/{{this._id}}/modify-role" method="POST" class="mb-2"> 
+            <div class="form-group">
+              <select name="newRole" class="form-control">
+                <option value="user">Usuario</option>
+                <option value="admin">Administrador</option>
+              </select>
+            </div>
+            <button type="submit" class="pastel-bg">Modificar Rol</button>
+          </form>
+          
+          <form action="/api/users/{{this._id}}/delete" method="POST"> 
+            <button type="submit" class="danger-bg">Eliminar Usuario</button>
+          </form>
+        </li>
+      {{/each}}
+    </ul>
+  </div>

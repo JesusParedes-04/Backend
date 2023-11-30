@@ -205,3 +205,13 @@ body {
 .pastel-bg:hover {
   background-color: #87ceeb;
 }
+
+.danger-bg{
+
+  background-color: #e6b0aa;
+}
+
+.danger-bg:hover{
+
+  background-color: #e6a098;
+}

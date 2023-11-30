@@ -1,14 +1,11 @@
 
 (async () => {
-  // Get buttons
   const addToCartButtons = document.querySelectorAll(".addToCart");
 
-  // Add event listeners
   addToCartButtons.forEach((button) => {
     button.addEventListener("click", async (event) => {
       const { productId, cartId } = event.target.dataset;
 
-      // Add product to cart
       try {
         const response = await fetch(
           `/api/carts/${cartId}/product/${productId}`,
