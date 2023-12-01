@@ -12,8 +12,7 @@ import logger from "./utils/logger.js";
 import swaggerUI from 'swagger-ui-express'
 import swaggerJSDoc from "swagger-jsdoc";
 import { info } from "./docs/info.js";
-import exphbs from "express-handlebars";
-const PORT = 8080;
+import { PORT } from "./config.js";
 
 const app = express();
 
