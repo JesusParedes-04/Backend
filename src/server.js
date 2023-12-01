@@ -34,9 +34,6 @@ app.set("views", __dirname  + "/views");
 
 app.use(passport.initialize());
 
-
-
-
 app.use("/", routes);
 const httpServer = app.listen(PORT, () => {
   logger.debug(`Server OK ${PORT}`);

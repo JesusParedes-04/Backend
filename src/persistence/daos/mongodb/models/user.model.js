@@ -33,6 +33,12 @@ const userSchema = new Schema({
     ref: "carts",
   },
 
+  // isGithub:{
+  //   type: Boolean,
+  //   required: true,
+  //   default: false
+  // },
+
   last_connection: {
     type: Date,
     default: Date.now

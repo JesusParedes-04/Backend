@@ -7,6 +7,9 @@ const productService = new ProductService();
 import { UserModel } from "../persistence/daos/mongodb/models/user.model.js";
 
 
+export const welcome = (req, res) => {
+res.render("home")
+};
 
 export const productsView = async (req, res) => {
   try {

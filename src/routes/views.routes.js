@@ -9,6 +9,7 @@ const router = Router();
 router.get("/products", optionalAuth, controller.productsView);
 router.get("/carts", optionalAuth, controller.cartView);
 router.get("/register", controller.registerView);
+router.get("/", controller.welcome);
 router.get("/error-register", controller.errorRegisterView);
 router.get("/login", controller.loginView);
 router.get("/error-login", controller.errorLoginView);

@@ -30,6 +30,8 @@ body {
     margin: 0 auto;
     padding: 16px;
   }
+
+
   
   .header {
     height: 60px;
@@ -52,23 +54,7 @@ body {
     align-items: center;
   }
   
-  .footer {
-    background-color: #333;
-    color: #fff;
-    display: flex;
-    padding: 0;
-    margin: 0;
-    justify-content: center;
-    align-items: center;
-    height: 80px;
-  }
-  
-  .footer .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-  }
+
   
   .productList {
     display: grid;
@@ -135,7 +121,7 @@ body {
   }
 
   button:hover {
-    background: #2c63d0;
+    background: #2c97d0;
     color: #fff;
   }
   
@@ -188,7 +174,6 @@ body {
 
   }
 
-
   .customBorder {
 
     border-radius: 5px;
@@ -206,6 +191,7 @@ body {
   background-color: #87ceeb;
 }
 
+
 .danger-bg{
 
   background-color: #e6b0aa;
@@ -214,4 +200,23 @@ body {
 .danger-bg:hover{
 
   background-color: #e6a098;
+}
+
+
+.custom-bg {
+  background-color: #b0e0e6; 
+  height: 66vh; 
+  padding: 20px;
+  padding-bottom: 40px;
+  border-radius: 10px;
+}
+
+.form-box{
+
+margin-top: 15vh
+
+}
+
+.footer-margin-log {
+  margin-bottom: 150px;
 }
