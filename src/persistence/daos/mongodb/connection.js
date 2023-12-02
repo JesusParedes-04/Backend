@@ -1,9 +1,7 @@
 import mongoose from "mongoose";
-import { CONNECTION_LOCAL_MONGO } from "../../../config.js";
+import { REMOTE_MONGO_URL } from "../../../config.js";
 
-export const connectionString = CONNECTION_LOCAL_MONGO
-
-
+export const connectionString = REMOTE_MONGO_URL
 
 
 export const initMongoDB = async () => {
