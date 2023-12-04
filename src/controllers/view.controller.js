@@ -1,13 +1,14 @@
 import ProductService from "../services/product.services.js";
 import * as cartService from "../services/cart.services.js";
-import * as cartController from '../controllers/cart.controller.js';
 import UserController from "../controllers/user.controller.js";
+import * as cartController from '../controllers/cart.controller.js';
 import UserService from "../services/user.services.js";
 const userController = new UserController()
 const productService = new ProductService();
 import { UserModel } from "../persistence/daos/mongodb/models/user.model.js";
 import { getAllMessages } from "../services/messages.services.js";
 import ticketService from "../services/ticket.services.js";
+
 
 export const welcome = (req, res) => {
 res.render("home")
@@ -81,9 +82,6 @@ export const errorLoginView = (req, res) => {
   res.render("errorLogin");
 };
 
-export const renderPurchase = async (req, res) => {
-  
-    res.render('checkout', ) }
 
 export const chat = async (req, res) => {
 
@@ -94,7 +92,6 @@ export const chat = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 }
-
 
 
 export const profile = async (req, res, next) => {
@@ -109,3 +106,4 @@ export const profile = async (req, res, next) => {
     res.status(500).send('Error al obtener los usuarios');
   }
 };
+

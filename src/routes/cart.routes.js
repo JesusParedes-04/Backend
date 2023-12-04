@@ -41,8 +41,10 @@ router.delete(
 router.post(
   "/:id/purchase",
   requireAuth,
-  authorize(["user" , "premium"]),
+  authorize(["user"]),
   controller.purchaseCart
 );
+
+
 
 export default router;

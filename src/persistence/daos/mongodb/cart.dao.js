@@ -16,6 +16,7 @@ export default class CartDao extends MongoDao {
     }
   }
 
+
   async addProductToCart(id, productId) {
     try {
       const product = await ProductModel.findById(productId);

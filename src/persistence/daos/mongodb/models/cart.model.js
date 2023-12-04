@@ -18,6 +18,8 @@ const cartSchema = new mongoose.Schema({
     required: true,
     default: [],
   },
+
+
 });
 
 export const CartModel = mongoose.model("carts", cartSchema);

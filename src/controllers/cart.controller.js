@@ -121,11 +121,14 @@ export const purchaseCart = async (req, res, next) => {
   try {
     const { user } = req;
     const { id } = req.params;
-    const result = await ticketService.generateTicket(id, user);
-    if (!result)
-      return createResponse(res, 400, { error: "Error generating ticket" });
 
-    const ticket = await ticketService.getById(result.ticket._id);
+    const result = await ticketService.generateTicket(user, id);
+
+    if (!result) {
+      return createResponse(res, 400, { error: "Error generating ticket" });
+    }
+
+    const ticket = await ticketService.getById(result._id);
 
     createResponse(res, 200, ticket);
   } catch (error) {

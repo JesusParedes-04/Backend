@@ -13,7 +13,7 @@ router.get("/error-register", controller.errorRegisterView);
 router.get("/login", controller.loginView);
 router.get("/error-login", controller.errorLoginView);
 router.get('/profile', requireAuth, authorize(["admin"]), controller.profile);
-router.get('/checkout', requireAuth, authorize(["user","premium"]), controller.renderPurchase);
+// router.get('/checkout', requireAuth, authorize(["user","premium"]), controller.purchaseView);
 router.get('/chat', requireAuth, authorize (["user","premium"]), controller.chat) 
 
 
