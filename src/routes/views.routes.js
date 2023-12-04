@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { optionalAuth } from "../middlewares/optionalAuth.js";
 import * as controller from "../controllers/view.controller.js";
-import { getAllMessages } from "../services/messages.services.js";
 import authorize from "../middlewares/authorize.js";
 import requireAuth from "../middlewares/requireAuth.js";
 const router = Router();
@@ -14,14 +13,8 @@ router.get("/error-register", controller.errorRegisterView);
 router.get("/login", controller.loginView);
 router.get("/error-login", controller.errorLoginView);
 router.get('/profile', requireAuth, authorize(["admin"]), controller.profile);
-router.get('/checkout', requireAuth, authorize(["user","premium"]), controller.checkout);
-router.get('/chat', async (req, res) => {
-    try {
-      const message = await getAllMessages();
-      res.render('chat', { title: 'Chat', message });
-    } catch (error) {
-      res.status(500).json({ message: error.message });
-    }
-  });
+router.get('/checkout', requireAuth, authorize(["user","premium"]), controller.renderPurchase);
+router.get('/chat', requireAuth, authorize (["user","premium"]), controller.chat) 
+
 
 export default router;

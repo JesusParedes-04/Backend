@@ -1,4 +1,4 @@
-
+<!-- cartItems.hbs -->
 <ul class="cartItemsList" id="cartItemsList">
   {{#if items.length}}
   {{#each items as |item|}}
@@ -8,43 +8,14 @@
       <h3 class="title">{{item.product.title}}</h3>
       <p class="description">{{item.product.description}}</p>
       <p>Unit Price: <b>${{item.product.price}}</b></p>
-
     </div>
     <div>
       <p>Quantity: <b>{{item.quantity}}</b></p>
       <p>Total Price: <b>${{item.totalPrice}}</b></p>
     </div>
-  </li>
-  {{/each}}
-
-    <form action="/checkout" method="GET">
-    <button type="submit" class="pastel-bg">Comprar</button>
-  </form>
-  
-  {{else}}
-  <h2>The cart is empty!</h2>
-  {{/if}}
-</ul>
-
-{{!-- <ul class="cartItemsList" id="cartItemsList">
-  {{#if items.length}}
-  {{#each items as |item index|}}
-  <li class="productCard">
-    <img src="/images/{{item.product.thumbnails.[0]}}" alt="{{item.product.title}}">
-    <div>
-      <h3 class="title">{{item.product.title}}</h3>
-      <p class="description">{{item.product.description}}</p>
-      <p>Unit Price: <b>${{item.product.price}}</b></p>
-    </div>
-    <div>
-      <p>Quantity: <b>{{item.quantity}}</b></p>
-      <p>Total Price: <b>${{item.totalPrice}}</b></p>
-  <form action="/api/carts/{{cartId}}/product/{{productId}}" method="POST">
-  <input type="hidden" name="_method" value="DELETE">
-  <button type="submit" class="danger-bg">Quitar Producto</button>
-</form>
-
-    </div>
+    <form action="/api/products/{{item._id}}/delete" method="POST">
+      <button type="submit" class="danger-bg">Eliminar producto</button>
+    </form>
   </li>
   {{/each}}
   <form action="/checkout" method="GET">
@@ -53,4 +24,4 @@
   {{else}}
   <h2>The cart is empty!</h2>
   {{/if}}
-</ul> --}}
+</ul>

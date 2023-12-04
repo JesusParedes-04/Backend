@@ -18,7 +18,7 @@ export default class UserService extends Services {
     const payload = {
       userId: user.id,
     };
-    return jwt.sign(payload, PRIVATE_KEY, { expiresIn: "10m" });
+    return jwt.sign(payload, PRIVATE_KEY, { expiresIn: "30m" });
   }
 
   async register(user) {

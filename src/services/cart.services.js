@@ -113,3 +113,4 @@ export const removeProducts = async (id) => {
     console.log(error);
   }
 };
+

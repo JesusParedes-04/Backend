@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Compra Realizada</title>
-</head>
-<body>
-  <h1>¡Compra Realizada!</h1>
-  <p>Tu compra se ha realizado con éxito. ¡Gracias por tu pedido!</p>
-</body>
-</html>
+ <h1>Purchase Details</h1>
+    {{#if ticket}}
+        <p>Ticket ID: {{ticket._id}}</p>
+        <p>Purchase Date: {{ticket.purchase_datetime}}</p>
+        <p>Total Amount: ${{ticket.amount}}</p>
+    {{else}}
+        <p>No ticket data available</p>
+    {{/if}}

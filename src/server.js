@@ -13,6 +13,7 @@ import swaggerUI from 'swagger-ui-express'
 import swaggerJSDoc from "swagger-jsdoc";
 import { info } from "./docs/info.js";
 import { PORT } from "./config.js";
+import session from "express-session";
 
 const app = express();
 

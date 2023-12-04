@@ -1,14 +1,21 @@
-<div id="chat-container">
-  <div id="chat-window">
-    <div id="output"></div>
-    <div id="actions"></div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div id="chat-container" class="mt-5">
+        <div id="chat-window">
+          <div id="output"></div>
+          <div id="actions"></div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control rounded p-3 mb-5" id="message" placeholder="message" />
+          <button class="rounded p-3 mt-5 mb-5 btn-custom-bg" id="send">Send</button>
+        </div>
+      </div>
+    </div>
   </div>
-  <input type="text" id="message" placeholder="message" />
-  <button id="send">Send</button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script src="socket.io/socket.io.js" charset="utf-8"></script>
 <script src="/indexChat.js"></script>
-
