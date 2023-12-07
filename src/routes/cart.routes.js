@@ -41,7 +41,7 @@ router.delete(
 router.post(
   "/:id/purchase",
   requireAuth,
-  authorize(["user"]),
+  authorize(["user", "premium"]),
   controller.purchaseCart
 );
 

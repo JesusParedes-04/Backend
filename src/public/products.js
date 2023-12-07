@@ -1,10 +1,12 @@
-
 (async () => {
   const addToCartButtons = document.querySelectorAll(".addToCart");
 
   addToCartButtons.forEach((button) => {
     button.addEventListener("click", async (event) => {
-      const { productId, cartId } = event.target.dataset;
+
+      const productId = event.target.dataset.productId;
+  const cartId = event.target.dataset.cartId;
+      // const { cartId , productId } = event.target.dataset;
 
       try {
         const response = await fetch(
@@ -16,6 +18,7 @@
             },
           }
         );
+        console.log(response)
         const result = await response.json();
 
         if (result.error) throw new Error(result.error);
@@ -27,8 +30,8 @@
           duration: 10000,
           gravity: "bottom",
           position: "right",
-          backgroundColor: "#87ceeb",
-          stopOnFocus: false,
+          backgroundColor: "#AED9E6",     
+          stopOnFocus: false
         }).showToast();
       } catch (error) {
         // Show error toast
@@ -37,8 +40,9 @@
           duration: 10000,
           gravity: "bottom",
           position: "right",
-          backgroundColor: "#87ceeb",
-          stopOnFocus: false,
+          backgroundColor: "#AED9E6",     
+          stopOnFocus: false
+
         }).showToast();
       }
     });
@@ -55,12 +59,10 @@
       duration: 10000,
       gravity: "bottom",
       position: "right",
-      backgroundColor: "#87ceeb",
       stopOnFocus: false,
     }).showToast();
 
     window.history.replaceState({}, document.title, "/products");
   }
 })();
-
 

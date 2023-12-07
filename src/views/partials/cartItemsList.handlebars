@@ -1,4 +1,3 @@
-<!-- cartItems.hbs -->
 <ul class="cartItemsList" id="cartItemsList">
   {{#if items.length}}
   {{#each items as |item|}}
@@ -13,9 +12,6 @@
       <p>Quantity: <b>{{item.quantity}}</b></p>
       <p>Total Price: <b>${{item.totalPrice}}</b></p>
     </div>
-    <form action="/api/products/{{item._id}}/delete" method="POST">
-      <button type="submit" class="danger-bg">Eliminar producto</button>
-    </form>
   </li>
   {{/each}}
   <form action="/checkout" method="GET">

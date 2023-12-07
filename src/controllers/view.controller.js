@@ -29,7 +29,6 @@ export const productsView = async (req, res) => {
     } = await productService.getAllPaginated({ page, limit: 2 });
 
     const plainProducts = products.map((product) => product.toObject());
-
     res.render("products", {
       ...(user && { user: user.toObject() }),
       products: plainProducts,
@@ -107,3 +106,12 @@ export const profile = async (req, res, next) => {
   }
 };
 
+
+export const purchaseView = (req, res) => {
+  res.render("checkout");
+};
+
+
+export const realTimeProducts = (req, res) => {
+  res.render('realTimeProducts')
+}

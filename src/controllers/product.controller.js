@@ -101,7 +101,7 @@ export const remove = async (req, res, next) => {
           await sendEmailWithText({
             email: user.email,
             subject: 'Producto eliminado',
-            text: 'El producto que poseías ha sido eliminado.',
+            text: 'El producto ha sido eliminado.',
           });
         } catch (emailError) {
           console.error('Error al enviar el correo electrónico:', emailError);
