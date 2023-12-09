@@ -18,3 +18,23 @@ Post Carts: localhost:8080/api/carts/purchase
 Get Users : localhost:8080/api/users/ 
 
 Delete Users : localhost:8080/api/users/ (Inactivos por 2 dias)
+
+------------------------
+.env:
+
+PRIVATE_KEY = 1234
+
+REMOTE_MONGO_URL = 
+"mongodb+srv://jesuMDB:jesu123@cluster0.rbvieyw.mongodb.net/?retryWrites=true&w=majority"
+
+EMAIL= jjesus.paredesl@gmail.com 
+
+EMAIL_PASSWORD = esbsogeojjundfot
+
+LOG_ENV = DEVELOPMENT
+
+PORT = 8080
+
+------------------------
+
+Deploy: backend-production-da11.up.railway.app
